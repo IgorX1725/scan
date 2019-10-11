@@ -9,13 +9,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="354.0" prefHeight="354.0" prefWidth="821.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ViewControler">
+<AnchorPane minHeight="354.0" prefHeight="354.0" prefWidth="821.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ViewController">
    <children>
       <Button fx:id="buttonScan" layoutX="372.0" layoutY="206.0" mnemonicParsing="false" onAction="#onButtonScanAction" prefHeight="57.0" prefWidth="82.0" text="Digitalizar">
          <font>
             <Font name="DejaVu Serif Condensed Bold" size="12.0" />
          </font></Button>
-      <Button layoutX="366.0" layoutY="94.0" mnemonicParsing="false" onAction="#onButtonImportAction" prefHeight="57.0" prefWidth="93.0" text="Importar">
+      <Button fx:id="buttonImport" layoutX="366.0" layoutY="94.0" mnemonicParsing="false" onAction="#onButtonImportAction" prefHeight="57.0" prefWidth="93.0" text="Importar">
          <font>
             <Font name="DejaVu Serif Bold" size="12.0" />
          </font></Button>
@@ -41,7 +41,7 @@
             <Tooltip text="Empty Tooltip" />
          </tooltip>
       </MenuBar>
-      <CheckBox layoutX="473.0" layoutY="206.0" mnemonicParsing="false" text="Frente e Verso">
+      <CheckBox fx:id="checkBoxFrontAndBack" layoutX="473.0" layoutY="206.0" mnemonicParsing="false" selected="" text="Frente e Verso">
          <font>
             <Font size="13.0" />
          </font>

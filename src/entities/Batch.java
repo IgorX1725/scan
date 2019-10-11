@@ -2,45 +2,48 @@ package entities;
 
 import java.io.File;
 
+
 public class Batch {
 
-	private File sourse;
+	private File source;
 
-	public Batch(File nameBatch) {
-		this.sourse = nameBatch;
+	public Batch(String nameBatch) {
+		this.source = new File(nameBatch);
+		createPath();
 	}
 
-	public boolean createPath() {
-		if (sourse.exists()) {
-			return false;
-		} else {
-			sourse.mkdirs();
+	private boolean createPath() {
+		if (!source.exists()) {
+			source.mkdirs();
 			return true;
+		}else {
+			return false;
 		}
+
 	}
 
-	public boolean deletePath() {
-			return sourse.delete();
+	public boolean deleteFiles() {
+		return source.delete();
 	}
 
 	public String[] listStrinFiles() {
-		return sourse.list();
+		return source.list();
 	}
 	
 	public File[] listFiles() {
-		return sourse.listFiles();
+		return source.listFiles();
 	}
 
 	public String getSource() {
-		return sourse.getPath();
+		return source.getPath();
 	}
 
 	public String getRoot() {
-		return sourse.getParent();
+		return source.getParent();
 	}
 
 	public String getNameBatch() {
-		return sourse.getName();
+		return source.getName();
 	}
 
 }

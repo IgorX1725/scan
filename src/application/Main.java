@@ -2,7 +2,7 @@ package application;
 	
 import java.io.IOException;
 
-import gui.ViewControler;
+import gui.ViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -16,12 +16,12 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader((getClass().getResource("/gui/View.fxml")));
 			Parent parent = loader.load();
-			ViewControler controller = (ViewControler)loader.getController();
-			controller.init(stage);
-			
+			ViewController controller = (ViewController)loader.getController();
+			controller.init(stage);			
 			Scene scene = new Scene(parent);
 			stage.setScene(scene);
 			stage.show();
+			controller.retrieveBatch();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -11,7 +11,10 @@ public class CopyDocument {
 	
 
 
-	@SuppressWarnings("finally")
+	
+	private static FileInputStream fileInputStream;
+	private static FileOutputStream fileOutputStream;
+
 	public static boolean copy(String directory) throws IOException {
 		FileChannel sourceChannel = null;
 		FileChannel destinationChannel = null;
@@ -25,31 +28,27 @@ public class CopyDocument {
 			destination = destination.replace(extension, i + extension);
 			while (file.exists()) {
 				destination = destination.replace((i - 1) + extension, i + extension);
-				System.out.println(extension);
 				file = new File(destination);
 				i++;
 			}
 		}
 	
 		
-		try {
-			
-			sourceChannel = new FileInputStream(directory).getChannel();
-			destinationChannel = new FileOutputStream(destination).getChannel();
+		
+			fileInputStream = new FileInputStream(directory);
+			sourceChannel = fileInputStream.getChannel();
+			fileOutputStream = new FileOutputStream(destination);
+			destinationChannel = fileOutputStream.getChannel();
 			sourceChannel.transferTo(0, sourceChannel.size(), destinationChannel);
-			return true;
 			
-		} catch (IOException e) {
 			
-			e.printStackTrace();
-			
-		} finally {
+		
 			if (sourceChannel != null && sourceChannel.isOpen())
 				sourceChannel.close();
 			if (destinationChannel != null && destinationChannel.isOpen())
 				destinationChannel.close();
 			return false;
-		}
+		
 
 	}
 }
