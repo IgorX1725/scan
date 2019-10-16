@@ -14,17 +14,23 @@ public class PanelLeftImage {
 	ScrollPane scrollPane = null;
 	ImageView imageView = null;
 	FXMLLoader loader = null;
-	AnchorPane root = null;
+	BorderPane root = null;
+	AnchorPane left = null;
 	
-	public PanelLeftImage() throws IOException {
-		loader = new FXMLLoader(getClass().getResource("gui/EditFiles.fxml"));
-		root =  loader.load();
-		root = (AnchorPane)((BorderPane) root.getChildren().get(0)).getLeft();
+	public PanelLeftImage()  {
+		try {
+		loader = new FXMLLoader(getClass().getResource("../gui/EditFiles.fxml"));
+			root =  loader.load();
+			left = (AnchorPane) root.getLeft();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public boolean create(Image image) {
+	public synchronized void create(Image image) {
+		left.getChildren().clear();
 		imageView = new ImageView(image);
-		imageView.setPreserveRatio(true);
-		return true;
+		scrollPane = new ScrollPane(imageView);
+		left.getChildren().add(scrollPane);
 	}
 }
