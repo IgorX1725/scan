@@ -22,11 +22,11 @@ public class EditFilesController {
 			BorderPane root = fxml.load();
 			AnchorPane listPicture = (AnchorPane) root.getRight();
 			TiffToFXImage.tiffToImageList(list);
-			listPicture.autosize();
-			listPicture.getChildren().add(createPaneImages(listPicture.getWidth(), listPicture.getHeight()));
+			listPicture.getChildren().add(createPaneImages(listPicture));
 			mainScene = new Scene(root);
 			stage.setTitle("Editar Documentos");
 			stage.setScene(mainScene);
+			stage.setMaximized(true);
 			stage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -38,16 +38,16 @@ public class EditFilesController {
 		
 		AnchorPane listPicture = (AnchorPane)((BorderPane)mainScene.getRoot()).getRight();
 		listPicture.getChildren().clear();
-		ScrollPane paneImages = new ScrollPane(createPaneImages(listPicture.getWidth(), listPicture.getHeight()));
+		ScrollPane paneImages = createPaneImages(listPicture);
 		listPicture.getChildren().add(paneImages);
 		
 	}
 	
-	private static ScrollPane createPaneImages(Double width, Double height) {
+	private static ScrollPane createPaneImages(AnchorPane parent) {
 		ScrollPane paneImages = new ScrollPane();
-		paneImages.setPrefWidth(width);
-		paneImages.setPrefHeight(height);
 		paneImages.setContent(GridWithImages.create());
+		paneImages.prefWidthProperty().bind(parent.widthProperty());
+		paneImages.prefHeightProperty().bind(parent.heightProperty());
 		return paneImages;
 	}
 

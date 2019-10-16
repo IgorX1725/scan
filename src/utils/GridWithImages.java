@@ -7,14 +7,14 @@ import javafx.scene.layout.StackPane;
 
 public class GridWithImages {
 	
-	static GridPane gridPane;
+	static GridPane gridPane = null;
 	
 	public static GridPane create() {
 	gridPane = new GridPane();
 	int x = 0;
 	int y = 0;
 	for (Image imageKey : MapImages.getInstance().keySet()) {
-		if(x > 1) {
+		if(x > 3) {
 			y++;
 			x = 0;
 		}
@@ -24,6 +24,14 @@ public class GridWithImages {
 		GridPane.setMargin(stackImage, new Insets(7, 7, 7, 7));
 		x++;
 	}
+	
+	
+	
 	return gridPane;
 	}
+
+	public static GridPane getGridPane() {
+		return gridPane;
+	}
+	
 }

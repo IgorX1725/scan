@@ -8,10 +8,6 @@ import java.nio.channels.FileChannel;
 
 public class CopyDocument {
 
-	
-
-
-	
 	private static FileInputStream fileInputStream;
 	private static FileOutputStream fileOutputStream;
 
@@ -32,9 +28,6 @@ public class CopyDocument {
 				i++;
 			}
 		}
-	
-		
-		
 			fileInputStream = new FileInputStream(directory);
 			sourceChannel = fileInputStream.getChannel();
 			fileOutputStream = new FileOutputStream(destination);
@@ -47,6 +40,7 @@ public class CopyDocument {
 				sourceChannel.close();
 			if (destinationChannel != null && destinationChannel.isOpen())
 				destinationChannel.close();
+				TiffToFXImage.tiffToImage(file);
 			return false;
 		
 

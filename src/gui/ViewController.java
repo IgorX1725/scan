@@ -23,15 +23,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import utils.CopyDocument;
 import utils.DeleteDocument;
 import utils.GetImageFXFromStackPane;
 import utils.ListImagesSelected;
 import utils.MapImages;
 import utils.RotateImage;
-import utils.TiffToFXImage;
 
 public class ViewController {
 
@@ -49,10 +48,7 @@ public class ViewController {
 	private Button buttonImportEditFiles = null;
 	@FXML
 	private CheckBox checkBoxFrontAndBackEditFiles = null;
-	@FXML
-	private List<ImageView> selectedImages = null;
-	@FXML
-	private Button buttonDelete = null;
+
 
 	private Stage stage;
 	private FileInputStream fileInputStream;
@@ -183,10 +179,9 @@ public class ViewController {
 			Image imageFX = GetImageFXFromStackPane.get(ListImagesSelected.getInstance().get(i));
 			DeleteDocument.deleteFile(MapImages.getInstance().get(imageFX));
 			MapImages.getInstance().remove(imageFX);
-			ListImagesSelected.getInstance().clear();
-			ListImagesSelected.getInstance().get(i).setStyle("-fx-border-style: none");
 			i++;
 		}
+		ListImagesSelected.getInstance().clear();
 		EditFilesController.updateImages();
 	}
 
@@ -195,11 +190,11 @@ public class ViewController {
 		while (i < ListImagesSelected.getInstance().size()) {
 			Image imageFX = GetImageFXFromStackPane.get(ListImagesSelected.getInstance().get(i));
 			RotateImage.rotate90(MapImages.getInstance().get(imageFX), MapImages.getInstance().get(imageFX), -1);
-			MapImages.getInstance().clear();
-			TiffToFXImage.tiffToImageList(batch.listFiles());
+			RotateImage.rotateImageView(ListImagesSelected.getInstance().get(i), true);
+			ListImagesSelected.getInstance().get(i).setStyle("-fx-border-style: none");
 			i++;
 		}
-		EditFilesController.updateImages();
+		ListImagesSelected.getInstance().clear();
 	}
 
 	public void onButtonRotateLeftAction() {
@@ -207,12 +202,26 @@ public class ViewController {
 		while (i < ListImagesSelected.getInstance().size()) {
 			Image imageFX = GetImageFXFromStackPane.get(ListImagesSelected.getInstance().get(i));
 			RotateImage.rotate90(MapImages.getInstance().get(imageFX), MapImages.getInstance().get(imageFX), 1);
-			MapImages.getInstance().clear();
-			TiffToFXImage.tiffToImageList(batch.listFiles());
+			RotateImage.rotateImageView(ListImagesSelected.getInstance().get(i), false);
+			ListImagesSelected.getInstance().get(i).setStyle("-fx-border-style: none");
 			i++;
 		}
-		EditFilesController.updateImages();
+		ListImagesSelected.getInstance().clear();
 	}
+	public void onButtonCopyAction() {
+		int i = 0;
+		while (i < ListImagesSelected.getInstance().size()) {
+			try {
+			CopyDocument.copy(MapImages.getInstance().get(GetImageFXFromStackPane.get(ListImagesSelected.getInstance().get(i))).getAbsolutePath());
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			i++;
+		}
+			ListImagesSelected.getInstance().clear();
+			EditFilesController.updateImages();
+	}
+	
 
 	public void init(Stage stage) {
 		this.stage = stage;
