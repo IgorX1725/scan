@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -57,17 +55,4 @@
         </items>
       </ToolBar>
    </bottom>
-   <left>
-      <AnchorPane prefHeight="620.0" prefWidth="543.0" BorderPane.alignment="CENTER" />
-   </left>
-   <right>
-      <AnchorPane fx:id="anchorPanelistDocuments" prefHeight="620.0" prefWidth="493.0" />
-   </right>
-   <center>
-      <Separator disable="true" orientation="VERTICAL" prefHeight="200.0" BorderPane.alignment="CENTER">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </Separator>
-   </center>
 </BorderPane>

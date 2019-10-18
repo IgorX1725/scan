@@ -1,8 +1,7 @@
 package utils;
 
-import java.io.IOException;
-
-import javafx.fxml.FXMLLoader;
+import gui.EditFilesController;
+import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,24 +12,23 @@ public class PanelLeftImage {
 	
 	ScrollPane scrollPane = null;
 	ImageView imageView = null;
-	FXMLLoader loader = null;
+	Scene editFilesScene = null;
 	BorderPane root = null;
 	AnchorPane left = null;
 	
 	public PanelLeftImage()  {
-		try {
-		loader = new FXMLLoader(getClass().getResource("../gui/EditFiles.fxml"));
-			root =  loader.load();
-			left = (AnchorPane) root.getLeft();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		editFilesScene = EditFilesController.getEditFilesScene();
+		root = (BorderPane) editFilesScene.getRoot();
+		left = new AnchorPane();
 	}
 	
 	public synchronized void create(Image image) {
 		left.getChildren().clear();
 		imageView = new ImageView(image);
+		imageView.setFitHeight(root.getHeight() + root.getHeight() * 1.5);
+		imageView.setFitWidth(root.getWidth()/2);
 		scrollPane = new ScrollPane(imageView);
-		left.getChildren().add(scrollPane);
+		scrollPane.setPrefSize(root.getWidth()/2, root.getHeight());
+		root.setLeft(scrollPane);
 	}
 }

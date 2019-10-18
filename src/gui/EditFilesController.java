@@ -12,20 +12,22 @@ import utils.GridWithImages;
 import utils.TiffToFXImage;
 
 public class EditFilesController {
-	
-	private static Scene mainScene = null;
-	
+
+	private static Scene editFilesScene = null;
 
 	public static void showDisplayEditWindow(FXMLLoader fxml, File[] list) {
 		try {
-			Stage stage = new Stage();
+			 
 			BorderPane root = fxml.load();
-			AnchorPane listPicture = (AnchorPane) root.getRight();
+			AnchorPane listPicture = new AnchorPane();
 			TiffToFXImage.tiffToImageList(list);
 			listPicture.getChildren().add(createPaneImages(listPicture));
-			mainScene = new Scene(root);
+			listPicture.setMaxWidth(root.getWidth()/2);
+			root.setRight(listPicture);
+			editFilesScene = new Scene(root);
+			Stage stage = new Stage();
 			stage.setTitle("Editar Documentos");
-			stage.setScene(mainScene);
+			stage.setScene(editFilesScene);
 			stage.setMaximized(true);
 			stage.show();
 		} catch (Exception e) {
@@ -35,21 +37,21 @@ public class EditFilesController {
 	}
 
 	public static void updateImages() {
-		
-		AnchorPane listPicture = (AnchorPane)((BorderPane)mainScene.getRoot()).getRight();
+
+		AnchorPane listPicture = (AnchorPane) ((BorderPane) editFilesScene.getRoot()).getRight();
 		listPicture.getChildren().clear();
 		ScrollPane paneImages = createPaneImages(listPicture);
 		listPicture.getChildren().add(paneImages);
-		
+
 	}
-	
+
 	private static ScrollPane createPaneImages(AnchorPane parent) {
 		ScrollPane paneImages = new ScrollPane();
 		paneImages.setContent(GridWithImages.create());
-		paneImages.prefWidthProperty().bind(parent.widthProperty());
-		paneImages.prefHeightProperty().bind(parent.heightProperty());
 		return paneImages;
 	}
-
-
+	
+	public static Scene getEditFilesScene() {
+		return editFilesScene;
+	}
 }
