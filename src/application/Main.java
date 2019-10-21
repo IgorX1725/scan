@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 
 
 public class Main extends Application {
+	public static Stage stage;
 	@Override
 	public void start(Stage stage) {
 		try {
@@ -18,8 +19,10 @@ public class Main extends Application {
 			Parent parent = loader.load();
 			ViewController controller = (ViewController)loader.getController();
 			controller.init(stage);			
+			Main.stage = stage;
 			Scene scene = new Scene(parent);
 			stage.setScene(scene);
+			stage.setResizable(false);
 			stage.show();
 			controller.retrieveBatch();
 		} catch (IOException e) {

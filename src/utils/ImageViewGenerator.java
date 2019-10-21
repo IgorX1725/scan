@@ -8,8 +8,13 @@ public class ImageViewGenerator {
 	
 	public static ImageView create(Image image,int width,int height) {
 		imageView = new ImageView(image);
-		imageView.setFitWidth(width);
-		imageView.setFitHeight(height);
+		if(image.getWidth() > image.getHeight()) {
+		imageView.setFitWidth(height);
+		imageView.setFitHeight(width);
+		}else {
+			imageView.setFitWidth(width);
+			imageView.setFitHeight(height);
+		}
 		return imageView;
 	}
 }

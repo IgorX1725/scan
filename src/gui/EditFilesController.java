@@ -2,11 +2,13 @@ package gui;
 
 import java.io.File;
 
+import application.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import utils.GridWithImages;
 import utils.TiffToFXImage;
@@ -26,6 +28,8 @@ public class EditFilesController {
 			root.setRight(listPicture);
 			editFilesScene = new Scene(root);
 			Stage stage = new Stage();
+			stage.initModality(Modality.WINDOW_MODAL);
+			stage.initOwner(Main.stage);
 			stage.setTitle("Editar Documentos");
 			stage.setScene(editFilesScene);
 			stage.setMaximized(true);

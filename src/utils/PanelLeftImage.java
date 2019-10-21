@@ -9,26 +9,32 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
 public class PanelLeftImage {
-	
+
 	ScrollPane scrollPane = null;
 	ImageView imageView = null;
 	Scene editFilesScene = null;
 	BorderPane root = null;
 	AnchorPane left = null;
-	
-	public PanelLeftImage()  {
+
+	public PanelLeftImage() {
 		editFilesScene = EditFilesController.getEditFilesScene();
 		root = (BorderPane) editFilesScene.getRoot();
 		left = new AnchorPane();
 	}
-	
-	public synchronized void create(Image image) {
+
+	public void create(Image image) {
 		left.getChildren().clear();
 		imageView = new ImageView(image);
-		imageView.setFitHeight(root.getHeight() + root.getHeight() * 1.5);
-		imageView.setFitWidth(root.getWidth()/2);
+		if (image.getWidth() > image.getHeight()) {
+			imageView.setFitHeight(root.getWidth() / 2);
+			imageView.setFitWidth(root.getHeight() + root.getWidth() * 0.5);
+		} else {
+			imageView.setFitHeight(root.getHeight() + root.getHeight() * 1.5);
+			imageView.setFitWidth(root.getWidth() / 2);
+		}
 		scrollPane = new ScrollPane(imageView);
-		scrollPane.setPrefSize(root.getWidth()/2, root.getHeight());
+		scrollPane.setPrefSize(root.getWidth() / 2, root.getHeight());
 		root.setLeft(scrollPane);
 	}
+
 }

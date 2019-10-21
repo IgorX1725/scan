@@ -58,17 +58,17 @@ public class ViewController {
 	private FXMLLoader viewEditFiles = new FXMLLoader(getClass().getResource("/gui/EditFiles.fxml"));
 
 	public void retrieveBatch() {
-		if (batch.listFiles().length > 0) {
+		if (batch.getLastModified().listFiles().length > 0) {
 			Optional<ButtonType> result = null;
 			result = Alerts.showAlert("Continuar lote...", "", "Deseja continuar o ultmo lote?",
 					Alert.AlertType.CONFIRMATION);
 			if (result.get() == ButtonType.YES) {
 				EditFilesController.showDisplayEditWindow(viewEditFiles, batch.listFiles());
-			} else if (result.get().equals(ButtonType.NO)) {
-				for (File file : batch.listFiles()) {
-					file.delete();
-				}
+			} else if (result.get().equals(ButtonType.CANCEL)) {
+				batch.createPath();
 			}
+		}else {
+			batch.createPath();
 		}
 	}
 
