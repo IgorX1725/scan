@@ -16,6 +16,9 @@ public class Batch {
 	public Batch(String source) {
 		root = new File(source);
 		listPath = new ArrayList<File>();
+		if (getLastModified() != null) {
+			batch = getLastModified();
+		}
 	}
 
 	private String createNameBatch() {
@@ -23,7 +26,7 @@ public class Batch {
 	}
 
 	public boolean createPath() {
-		batch = new File(root.getAbsolutePath()+"\\"+createNameBatch());
+		batch = new File(root.getAbsolutePath() + "\\" + createNameBatch());
 		if (!batch.exists()) {
 			batch.mkdirs();
 			return true;
@@ -34,13 +37,16 @@ public class Batch {
 	}
 
 	public List<File> getChildFolder() {
+		if (root.listFiles().length == 0) {
+			createPath();
+		}
 		return Arrays.asList(root.listFiles());
 	}
 
 	public File getLastModified() {
 		Long last = 0L;
 		File lastPath = null;
-			listPath = getChildFolder();
+		listPath = getChildFolder();
 		for (File file : listPath) {
 			if (file.lastModified() > last) {
 				last = file.lastModified();

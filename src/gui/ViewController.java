@@ -49,12 +49,12 @@ public class ViewController {
 	@FXML
 	private CheckBox checkBoxFrontAndBackEditFiles = null;
 
-
 	private Stage stage;
 	private FileInputStream fileInputStream;
 	private FileOutputStream fileOutputStream;
 	private String source = "C:\\temp\\lote";
-	Batch batch = new Batch(source);
+	private Batch batch = new Batch(source);
+	private String profile;
 	private FXMLLoader viewEditFiles = new FXMLLoader(getClass().getResource("/gui/EditFiles.fxml"));
 
 	public void retrieveBatch() {
@@ -67,20 +67,19 @@ public class ViewController {
 			} else if (result.get().equals(ButtonType.CANCEL)) {
 				batch.createPath();
 			}
-		}else {
+		} else {
+			batch.getLastModified().delete();
 			batch.createPath();
 		}
 	}
 
 	public void onButtonScanAction() {
-		String profile = checkBoxFrontAndBack.isSelected() ? Profiles.FRENTEVERSO.toString().toLowerCase()
+		profile = checkBoxFrontAndBack.isSelected() ? Profiles.FRENTEVERSO.toString().toLowerCase()
 				: Profiles.FRENTE.toString().toLowerCase();
 		try {
 			ScanDocument.scanningDocument("cmd /c naps2.console -o " + batch.getSource()
 					+ "\"\\$(n).tiff\" --split --progress -p " + profile);
-
 			EditFilesController.showDisplayEditWindow(viewEditFiles, batch.listFiles());
-
 		} catch (IOException e) {
 			Alerts.showAlert("Erro", "", "Ocorreu um erro ao criar o lote:" + e.getMessage(), AlertType.ERROR);
 			System.out.println("Ocorreu um erro ao criar o lote:" + e.getMessage());
@@ -126,7 +125,7 @@ public class ViewController {
 	}
 
 	public void onButtonScanActionEditFiles() {
-		String profile = checkBoxFrontAndBack.isSelected() ? Profiles.FRENTEVERSO.toString().toLowerCase()
+		profile = checkBoxFrontAndBack.isSelected() ? Profiles.FRENTEVERSO.toString().toLowerCase()
 				: Profiles.FRENTE.toString().toLowerCase();
 		try {
 			ScanDocument.scanningDocument("cmd /c naps2.console -o " + batch.getSource()
@@ -208,20 +207,21 @@ public class ViewController {
 		}
 		ListImagesSelected.getInstance().clear();
 	}
+
 	public void onButtonCopyAction() {
 		int i = 0;
 		while (i < ListImagesSelected.getInstance().size()) {
 			try {
-			CopyDocument.copy(MapImages.getInstance().get(GetImageFXFromStackPane.get(ListImagesSelected.getInstance().get(i))).getAbsolutePath());
-			}catch (Exception e) {
+				CopyDocument.copy(MapImages.getInstance()
+						.get(GetImageFXFromStackPane.get(ListImagesSelected.getInstance().get(i))).getAbsolutePath());
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			i++;
 		}
-			ListImagesSelected.getInstance().clear();
-			EditFilesController.updateImages();
+		ListImagesSelected.getInstance().clear();
+		EditFilesController.updateImages();
 	}
-	
 
 	public void init(Stage stage) {
 		this.stage = stage;
