@@ -16,18 +16,21 @@ import utils.TiffToFXImage;
 public class EditFilesController {
 
 	private static Scene editFilesScene = null;
+	private static BorderPane root = null;
+	private static AnchorPane listPicture = null;
+	private static Stage stage = null;
 
 	public static void showDisplayEditWindow(FXMLLoader fxml, File[] list) {
 		try {
-			 
-			BorderPane root = fxml.load();
-			AnchorPane listPicture = new AnchorPane();
+
+			root = fxml.load();
+			listPicture = new AnchorPane();
 			TiffToFXImage.tiffToImageList(list);
 			listPicture.getChildren().add(createPaneImages(listPicture));
-			listPicture.setMaxWidth(root.getWidth()/2);
+			listPicture.setMaxWidth(root.getWidth() / 2);
 			root.setRight(listPicture);
 			editFilesScene = new Scene(root);
-			Stage stage = new Stage();
+			stage = new Stage();
 			stage.initModality(Modality.WINDOW_MODAL);
 			stage.initOwner(Main.stage);
 			stage.setTitle("Editar Documentos");
@@ -54,7 +57,7 @@ public class EditFilesController {
 		paneImages.setContent(GridWithImages.create());
 		return paneImages;
 	}
-	
+
 	public static Scene getEditFilesScene() {
 		return editFilesScene;
 	}

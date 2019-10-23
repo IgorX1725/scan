@@ -40,5 +40,19 @@ public class TiffToFXImage{
 		}
 		return true;
 	}
+	
+	public static Image toImageFX(File image) {
+		try {
+			tiff = ImageIO.read(image);
+			result = new BufferedImage(tiff.getWidth(), tiff.getHeight(), BufferedImage.TYPE_INT_RGB);
+			result.createGraphics().drawImage(tiff, 0, 0, Color.WHITE, null);
+			imageFX = SwingFXUtils.toFXImage(result, null); 
+			return imageFX;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
 
 }

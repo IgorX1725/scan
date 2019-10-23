@@ -1,9 +1,12 @@
 package utils;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
 public class ActionImageSelected {
 	private static PanelLeftImage panelImage = new PanelLeftImage();
+	static Image imageFX = null;
 
 	public static void addImage(StackPane image) {
 		
@@ -15,8 +18,14 @@ public class ActionImageSelected {
 			}
 		}
 			ListImagesSelected.getInstance().add(image);
-			panelImage.create(GetImageFXFromStackPane.get(image));
+			imageFX = ((ImageView) image.getChildren().get(0)).getImage();
+			panelImage.create(imageFX);
 			image.setStyle("-fx-border-style: solid");
 
 		}
+
+	public static PanelLeftImage getPanelImage() {
+		return panelImage;
+	}
+		
 }

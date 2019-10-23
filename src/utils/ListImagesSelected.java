@@ -7,6 +7,7 @@ import javafx.scene.layout.StackPane;
 
 public class ListImagesSelected {
 
+	
 	private static List<StackPane> images = null;
 
 	private ListImagesSelected() {}
@@ -14,10 +15,10 @@ public class ListImagesSelected {
 	public static List<StackPane> getInstance(){
 		if(images == null) {
 			images = new ArrayList<StackPane>();
-			return images;
 		}else {
 			return images;
 		}
+		return images;
 	}
 
 }

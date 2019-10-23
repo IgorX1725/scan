@@ -190,10 +190,9 @@ public class ViewController {
 			Image imageFX = GetImageFXFromStackPane.get(ListImagesSelected.getInstance().get(i));
 			RotateImage.rotate90(MapImages.getInstance().get(imageFX), MapImages.getInstance().get(imageFX), -1);
 			RotateImage.rotateImageView(ListImagesSelected.getInstance().get(i), true);
-			ListImagesSelected.getInstance().get(i).setStyle("-fx-border-style: none");
 			i++;
 		}
-		ListImagesSelected.getInstance().clear();
+		
 	}
 
 	public void onButtonRotateLeftAction() {
@@ -202,18 +201,16 @@ public class ViewController {
 			Image imageFX = GetImageFXFromStackPane.get(ListImagesSelected.getInstance().get(i));
 			RotateImage.rotate90(MapImages.getInstance().get(imageFX), MapImages.getInstance().get(imageFX), 1);
 			RotateImage.rotateImageView(ListImagesSelected.getInstance().get(i), false);
-			ListImagesSelected.getInstance().get(i).setStyle("-fx-border-style: none");
 			i++;
 		}
-		ListImagesSelected.getInstance().clear();
+		
 	}
 
 	public void onButtonCopyAction() {
 		int i = 0;
 		while (i < ListImagesSelected.getInstance().size()) {
 			try {
-				CopyDocument.copy(MapImages.getInstance()
-						.get(GetImageFXFromStackPane.get(ListImagesSelected.getInstance().get(i))).getAbsolutePath());
+				CopyDocument.copy(MapImages.getInstance().get(GetImageFXFromStackPane.get(ListImagesSelected.getInstance().get(i))).getAbsolutePath());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

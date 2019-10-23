@@ -9,7 +9,6 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
 public class RotateImage {
@@ -42,22 +41,18 @@ public class RotateImage {
 				}
 			}
 			ImageIO.write(rotated, format, output);
-
+ 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public static void rotateImageView(StackPane image, boolean direction) {
-			int row = GridPane.getRowIndex(image);
-			int column = GridPane.getColumnIndex(image);
-
-			if (direction) {
-				image.setRotate(image.getRotate() + 90);
-			} else {
-				image.setRotate(image.getRotate() - 90);
-			}
-			GridWithImages.getGridPane().getChildren().remove(image);
-			GridWithImages.getGridPane().add(image, row, column);
+		if (direction) {
+			image.setRotate(image.getRotate() + 90);
+		} else {
+			image.setRotate(image.getRotate() - 90);
+		}
+		ActionImageSelected.getPanelImage().update(image);
 	}
 }
