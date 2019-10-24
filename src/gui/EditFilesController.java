@@ -6,30 +6,27 @@ import application.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ToolBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import utils.GridWithImages;
-import utils.TiffToFXImage;
+import utils.ImageFileToFXImage;
 
 public class EditFilesController {
 
 	private static Scene editFilesScene = null;
 	private static BorderPane root = null;
-	private static AnchorPane listPicture = null;
 	private static Stage stage = null;
+	private static ScrollPane scrollImages;
 
 	public static void showDisplayEditWindow(FXMLLoader fxml, File[] list) {
 		try {
 
 			root = fxml.load();
-			listPicture = new AnchorPane();
-			TiffToFXImage.tiffToImageList(list);
-			listPicture.getChildren().add(createPaneImages(listPicture));
-			listPicture.setMaxWidth(root.getWidth() / 2);
-			root.setRight(listPicture);
 			editFilesScene = new Scene(root);
+			ImageFileToFXImage.tiffToImageList(list);
 			stage = new Stage();
 			stage.initModality(Modality.WINDOW_MODAL);
 			stage.initOwner(Main.stage);
@@ -37,6 +34,9 @@ public class EditFilesController {
 			stage.setScene(editFilesScene);
 			stage.setMaximized(true);
 			stage.show();
+			scrollImages = createPaneImages();
+			root.setRight(scrollImages);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 
@@ -44,17 +44,17 @@ public class EditFilesController {
 	}
 
 	public static void updateImages() {
-
-		AnchorPane listPicture = (AnchorPane) ((BorderPane) editFilesScene.getRoot()).getRight();
-		listPicture.getChildren().clear();
-		ScrollPane paneImages = createPaneImages(listPicture);
-		listPicture.getChildren().add(paneImages);
+		root.setRight(null);
+		ScrollPane paneImages = createPaneImages();
+		root.setRight(paneImages);
 
 	}
 
-	private static ScrollPane createPaneImages(AnchorPane parent) {
-		ScrollPane paneImages = new ScrollPane();
-		paneImages.setContent(GridWithImages.create());
+	private static ScrollPane createPaneImages() {
+		Double Width = root.getWidth()/2;
+		Double height = root.getHeight() - (((AnchorPane)root.getTop()).getHeight() + ((ToolBar)root.getBottom()).getHeight()); 
+		ScrollPane paneImages = new ScrollPane(GridWithImages.create());
+		paneImages.setPrefSize(Width, height);
 		return paneImages;
 	}
 

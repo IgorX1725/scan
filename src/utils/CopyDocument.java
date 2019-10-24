@@ -40,7 +40,7 @@ public class CopyDocument {
 				sourceChannel.close();
 			if (destinationChannel != null && destinationChannel.isOpen())
 				destinationChannel.close();
-				TiffToFXImage.tiffToImage(file);
+				ImageFileToFXImage.tiffToImage(file);
 			return false;
 		
 

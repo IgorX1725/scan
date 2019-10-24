@@ -25,6 +25,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import utils.ActionImageSelected;
 import utils.CopyDocument;
 import utils.DeleteDocument;
 import utils.GetImageFXFromStackPane;
@@ -124,12 +125,13 @@ public class ViewController {
 		}
 	}
 
-	public void onButtonScanActionEditFiles() {
+	public synchronized void onButtonScanActionEditFiles() {
 		profile = checkBoxFrontAndBack.isSelected() ? Profiles.FRENTEVERSO.toString().toLowerCase()
 				: Profiles.FRENTE.toString().toLowerCase();
 		try {
 			ScanDocument.scanningDocument("cmd /c naps2.console -o " + batch.getSource()
 					+ "\"\\$(n).tiff\" --split --progress -p " + profile);
+			EditFilesController.updateImages();
 		} catch (IOException e) {
 			Alerts.showAlert("Erro", "", "Ocorreu um erro ao criar o lote:" + e.getMessage(), AlertType.ERROR);
 			System.out.println("Ocorreu um erro ao criar o lote:" + e.getMessage());
@@ -157,6 +159,7 @@ public class ViewController {
 						sourceChannel.close();
 					if (destinationChannel != null && destinationChannel.isOpen())
 						destinationChannel.close();
+					EditFilesController.updateImages();
 				} catch (FileNotFoundException e) {
 					Alerts.showAlert("Erro", "", "Ocorreu um erro ao importar o arquivo para o lote: " + e.getMessage(),
 							AlertType.ERROR);
@@ -168,18 +171,20 @@ public class ViewController {
 				}
 			}
 		} catch (NullPointerException e) {
-			System.out.println("Nenhum arquivo foi selecionado: " + e.getMessage());
+			Alerts.showAlert("Aviso", "", "Nenhum arquivo foi selecionado ", AlertType.WARNING);
 		}
 	}
 
 	public void onButtonDeletenAction() {
 		int i = 0;
+
 		while (i < ListImagesSelected.getInstance().size()) {
 			Image imageFX = GetImageFXFromStackPane.get(ListImagesSelected.getInstance().get(i));
 			DeleteDocument.deleteFile(MapImages.getInstance().get(imageFX));
 			MapImages.getInstance().remove(imageFX);
 			i++;
 		}
+		ActionImageSelected.getPanelImage().clearPane();
 		ListImagesSelected.getInstance().clear();
 		EditFilesController.updateImages();
 	}
@@ -192,7 +197,7 @@ public class ViewController {
 			RotateImage.rotateImageView(ListImagesSelected.getInstance().get(i), true);
 			i++;
 		}
-		
+
 	}
 
 	public void onButtonRotateLeftAction() {
@@ -203,14 +208,15 @@ public class ViewController {
 			RotateImage.rotateImageView(ListImagesSelected.getInstance().get(i), false);
 			i++;
 		}
-		
+
 	}
 
 	public void onButtonCopyAction() {
 		int i = 0;
 		while (i < ListImagesSelected.getInstance().size()) {
 			try {
-				CopyDocument.copy(MapImages.getInstance().get(GetImageFXFromStackPane.get(ListImagesSelected.getInstance().get(i))).getAbsolutePath());
+				CopyDocument.copy(MapImages.getInstance()
+						.get(GetImageFXFromStackPane.get(ListImagesSelected.getInstance().get(i))).getAbsolutePath());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

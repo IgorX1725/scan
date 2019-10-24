@@ -12,7 +12,7 @@ import javafx.scene.image.Image;
 
 
 
-public class TiffToFXImage{
+public class ImageFileToFXImage{
 	private static BufferedImage tiff = null;
 	private static BufferedImage result = null;
 	private static Image imageFX = null;
