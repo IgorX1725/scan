@@ -22,7 +22,7 @@ public class GridWithImages {
 				StackPane stackImage = new StackPane(ImageViewGenerator.create(imageKey, 200, 300));
 				stackImage.setOnMousePressed(mousePressedEvent);
 				gridPane.add(stackImage, x, y);
-				GridPane.setMargin(stackImage, new Insets(7, 25, 7, 25));
+				GridPane.setMargin(stackImage, new Insets(7, 50, 7, 50));
 				x++;
 			}
 			return gridPane;

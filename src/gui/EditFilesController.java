@@ -51,8 +51,9 @@ public class EditFilesController {
 	}
 
 	private static ScrollPane createPaneImages() {
-		Double Width = root.getWidth()/2;
-		Double height = root.getHeight() - (((AnchorPane)root.getTop()).getHeight() + ((ToolBar)root.getBottom()).getHeight()); 
+		Double Width = root.getWidth() / 2;
+		Double height = root.getHeight()
+				- (((AnchorPane) root.getTop()).getHeight() + ((ToolBar) root.getBottom()).getHeight());
 		ScrollPane paneImages = new ScrollPane(GridWithImages.create());
 		paneImages.setPrefSize(Width, height);
 		return paneImages;
@@ -61,4 +62,10 @@ public class EditFilesController {
 	public static Scene getEditFilesScene() {
 		return editFilesScene;
 	}
+
+	public static Stage getEditFilesStage() {
+		return stage;
+	}
+	
+
 }

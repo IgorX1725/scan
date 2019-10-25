@@ -29,6 +29,7 @@ import utils.ActionImageSelected;
 import utils.CopyDocument;
 import utils.DeleteDocument;
 import utils.GetImageFXFromStackPane;
+import utils.ImageFileToFXImage;
 import utils.ListImagesSelected;
 import utils.MapImages;
 import utils.RotateImage;
@@ -53,8 +54,8 @@ public class ViewController {
 	private Stage stage;
 	private FileInputStream fileInputStream;
 	private FileOutputStream fileOutputStream;
-	private String source = "C:\\temp\\lote";
-	private Batch batch = new Batch(source);
+	private static String source = "C:\\temp\\lote";
+	private static Batch batch = new Batch(source);
 	private String profile;
 	private FXMLLoader viewEditFiles = new FXMLLoader(getClass().getResource("/gui/EditFiles.fxml"));
 
@@ -66,15 +67,14 @@ public class ViewController {
 			if (result.get() == ButtonType.YES) {
 				EditFilesController.showDisplayEditWindow(viewEditFiles, batch.listFiles());
 			} else if (result.get().equals(ButtonType.CANCEL)) {
-				batch.createPath();
 			}
 		} else {
 			batch.getLastModified().delete();
-			batch.createPath();
 		}
 	}
 
 	public void onButtonScanAction() {
+		batch.createPath();
 		profile = checkBoxFrontAndBack.isSelected() ? Profiles.FRENTEVERSO.toString().toLowerCase()
 				: Profiles.FRENTE.toString().toLowerCase();
 		try {
@@ -91,6 +91,7 @@ public class ViewController {
 	}
 
 	public void onButtonImportAction() {
+		batch.createPath();
 		FileChannel sourceChannel = null;
 		FileChannel destinationChannel = null;
 		List<File> files;
@@ -108,8 +109,6 @@ public class ViewController {
 						sourceChannel.close();
 					if (destinationChannel != null && destinationChannel.isOpen())
 						destinationChannel.close();
-					EditFilesController.showDisplayEditWindow(viewEditFiles, batch.listFiles());
-
 				} catch (FileNotFoundException e) {
 					Alerts.showAlert("Erro", "", "Ocorreu um erro ao importar o arquivo para o lote: " + e.getMessage(),
 							AlertType.ERROR);
@@ -120,18 +119,19 @@ public class ViewController {
 					e.printStackTrace();
 				}
 			}
-		} catch (NullPointerException e) {
-			System.out.println("Nenhum arquivo foi selecionado: " + e.getMessage());
+			EditFilesController.showDisplayEditWindow(viewEditFiles, batch.listFiles());
+		} catch(NullPointerException e) {
+			Alerts.showAlert("Aviso", "", "Nenhum arquivo foi selecionado ", AlertType.WARNING);
+			batch.getLastModified().delete();
 		}
 	}
 
-	public synchronized void onButtonScanActionEditFiles() {
+	public void onButtonScanActionEditFiles() {
 		profile = checkBoxFrontAndBack.isSelected() ? Profiles.FRENTEVERSO.toString().toLowerCase()
 				: Profiles.FRENTE.toString().toLowerCase();
 		try {
 			ScanDocument.scanningDocument("cmd /c naps2.console -o " + batch.getSource()
 					+ "\"\\$(n).tiff\" --split --progress -p " + profile);
-			EditFilesController.updateImages();
 		} catch (IOException e) {
 			Alerts.showAlert("Erro", "", "Ocorreu um erro ao criar o lote:" + e.getMessage(), AlertType.ERROR);
 			System.out.println("Ocorreu um erro ao criar o lote:" + e.getMessage());
@@ -139,6 +139,8 @@ public class ViewController {
 			Alerts.showAlert("Alerta", "", "Ocorreu um Problema: " + e.getMessage(), AlertType.WARNING);
 			System.out.println("Ocorreu um Problema: " + e.getMessage());
 		}
+		ImageFileToFXImage.tiffToImageList(ImageFileToFXImage.getNewFiles());
+		EditFilesController.updateImages();
 	}
 
 	public void onButtonImportActionEditFiles() {
@@ -229,6 +231,10 @@ public class ViewController {
 	public void init(Stage stage) {
 		this.stage = stage;
 
+	}
+	
+	public static Batch getBatch(){
+		return batch;
 	}
 
 }
