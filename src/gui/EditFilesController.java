@@ -19,24 +19,29 @@ public class EditFilesController {
 	private static Scene editFilesScene = null;
 	private static BorderPane root = null;
 	private static Stage stage = null;
-	private static ScrollPane scrollImages;
+	private static ScrollPane scrollImages = null;
 
 	public static void showDisplayEditWindow(FXMLLoader fxml, File[] list) {
 		try {
+			if (stage == null) {
+				root = fxml.load();
+				editFilesScene = new Scene(root);
+				ImageFileToFXImage.tiffToImageList(list);
+				stage = new Stage();
+				stage.initModality(Modality.WINDOW_MODAL);
+				stage.initOwner(Main.stage);
+				stage.setTitle("Editar Documentos");
+				stage.setScene(editFilesScene);
+				stage.setMaximized(true);
+				stage.show();
+				scrollImages = createPaneImages();
+				root.setRight(scrollImages);
+			}else {
+				ImageFileToFXImage.tiffToImageList(list);
+				updateImages();
+				stage.show();
+			}
 
-			root = fxml.load();
-			editFilesScene = new Scene(root);
-			ImageFileToFXImage.tiffToImageList(list);
-			stage = new Stage();
-			stage.initModality(Modality.WINDOW_MODAL);
-			stage.initOwner(Main.stage);
-			stage.setTitle("Editar Documentos");
-			stage.setScene(editFilesScene);
-			stage.setMaximized(true);
-			stage.show();
-			scrollImages = createPaneImages();
-			root.setRight(scrollImages);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 
@@ -66,6 +71,10 @@ public class EditFilesController {
 	public static Stage getEditFilesStage() {
 		return stage;
 	}
-	
+
+	public static void closeStage() {
+		stage.close();
+
+	}
 
 }

@@ -11,23 +11,22 @@ public class GridWithImages {
 	public static MousePressedEvent mousePressedEvent = new MousePressedEvent();
 
 	public static GridPane create() {
-		gridPane = new GridPane();
-		int x = 0;
-		int y = 0;
-		for (Image imageKey : MapImages.getInstance().keySet()) {
-			if (x > 2) {
-				y++;
-				x = 0;
-			}
+			gridPane = new GridPane();
+			int x = 0;
+			int y = 0;
+			for (Image imageKey : MapImages.getInstance().keySet()) {
+				if (x > 2) {
+					y++;
+					x = 0;
+				}
 				StackPane stackImage = new StackPane(ImageViewGenerator.create(imageKey, 200, 300));
 				stackImage.setOnMousePressed(mousePressedEvent);
 				gridPane.add(stackImage, x, y);
 				GridPane.setMargin(stackImage, new Insets(7, 50, 7, 50));
 				x++;
 			}
-			return gridPane;
-		}
-	
+		return gridPane;
+	}
 
 	public static GridPane getGridPane() {
 		return gridPane;

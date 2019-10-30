@@ -26,6 +26,11 @@
                   <Font size="14.0" />
                </font>
             </CheckBox>
+            <Button fx:id="buttonScan" layoutX="514.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#onButtonDoneAction" text="Feito">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </top>

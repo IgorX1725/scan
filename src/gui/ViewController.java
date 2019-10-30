@@ -50,13 +50,15 @@ public class ViewController {
 	private Button buttonImportEditFiles = null;
 	@FXML
 	private CheckBox checkBoxFrontAndBackEditFiles = null;
+	@FXML
+	private Button buttonDone = null;
 
-	private Stage stage;
-	private FileInputStream fileInputStream;
-	private FileOutputStream fileOutputStream;
+	private Stage stage = null;
+	private FileInputStream fileInputStream = null;
+	private FileOutputStream fileOutputStream = null;
 	private static String source = "C:\\temp\\lote";
 	private static Batch batch = new Batch(source);
-	private String profile;
+	private String profile = null;
 	private FXMLLoader viewEditFiles = new FXMLLoader(getClass().getResource("/gui/EditFiles.fxml"));
 
 	public void retrieveBatch() {
@@ -118,8 +120,9 @@ public class ViewController {
 							AlertType.ERROR);
 					e.printStackTrace();
 				}
+				MapImages.getInstance().clear();
+				EditFilesController.showDisplayEditWindow(viewEditFiles, batch.listFiles());
 			}
-			EditFilesController.showDisplayEditWindow(viewEditFiles, batch.listFiles());
 		} catch(NullPointerException e) {
 			Alerts.showAlert("Aviso", "", "Nenhum arquivo foi selecionado ", AlertType.WARNING);
 			batch.getLastModified().delete();
@@ -175,6 +178,12 @@ public class ViewController {
 		} catch (NullPointerException e) {
 			Alerts.showAlert("Aviso", "", "Nenhum arquivo foi selecionado ", AlertType.WARNING);
 		}
+	}
+	
+	public void onButtonDoneAction() {
+		ListImagesSelected.getInstance().clear();
+		MapImages.getInstance().clear();
+		EditFilesController.closeStage();
 	}
 
 	public void onButtonDeletenAction() {
