@@ -25,6 +25,7 @@ public class PanelLeftImage {
 		root = (BorderPane) editFilesScene.getRoot();
 		scrollPane = new ScrollPane();
 	}
+	// Método responsável por criar  a imagem a ser exibida quando há o evento do clique do mouse em alguma image do grid de imagens 
 	public void create(Image image) {
 		scrollPane.setContent(null);
 		imageRotated = MapImages.getInstance().get(image);
