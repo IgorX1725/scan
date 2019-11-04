@@ -34,7 +34,7 @@ public class PanelLeftImage {
 			imageView.setFitHeight(root.getWidth() / 2);
 			imageView.setFitWidth(root.getHeight() + root.getWidth() * 0.5);
 		} else {
-			imageView.setFitHeight(root.getHeight() + root.getHeight() * 1.5);
+			imageView.setFitHeight(root.getHeight() + root.getHeight() * 1.0);
 			imageView.setFitWidth(root.getWidth() / 2);
 		}
 		scrollPane.setContent(imageView);
