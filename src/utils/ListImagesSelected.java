@@ -5,6 +5,7 @@ import java.util.List;
 
 import javafx.scene.layout.StackPane;
 
+// Classe responsável por criar e retornar o Singleton da lista dos arquivos que estão sendo selecionados na janela de edição para serem editadas 
 public class ListImagesSelected {
 
 	

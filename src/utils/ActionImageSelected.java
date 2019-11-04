@@ -4,6 +4,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 
+//Classe responsável por disparar a ação quando um documento é selecionado
 public class ActionImageSelected {
 	private static PanelLeftImage panelImage = new PanelLeftImage();
 	static Image imageFX = null;

@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 
+//Classe responsável por converter o arquivo de imagem em Buffer para uma imagem do tipo ImageFX para ser exibida na interface gráfica
 public class ConvertToImageFX {
 
 	public static Image convertToFxImage(BufferedImage image) {

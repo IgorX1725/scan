@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 
+//Classe responsável por copiar a imagem de algum diretório do disco para dentro do lote atual
 public class CopyDocument {
 
 	private static FileInputStream fileInputStream;

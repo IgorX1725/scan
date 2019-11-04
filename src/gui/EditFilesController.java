@@ -13,14 +13,15 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import utils.GridWithImages;
 import utils.ImageFileToFXImage;
-
+// Controlador da GUI EditFiles.fxml
 public class EditFilesController {
 
 	private static Scene editFilesScene = null;
 	private static BorderPane root = null;
 	private static Stage stage = null;
 	private static ScrollPane scrollImages = null;
-
+	
+	//Metodo para exibir a janela de edição dos documentos do lote
 	public static void showDisplayEditWindow(FXMLLoader fxml, File[] list) {
 		try {
 			if (stage == null) {
@@ -47,14 +48,14 @@ public class EditFilesController {
 
 		}
 	}
-
+//Metodo para atualizar a visualização dos documentos quando houver alguma alteração no lote
 	public static void updateImages() {
 		root.setRight(null);
 		ScrollPane paneImages = createPaneImages();
 		root.setRight(paneImages);
 
 	}
-
+// Metodo para criar o painel das imagens presentes no lote
 	private static ScrollPane createPaneImages() {
 		Double Width = root.getWidth() / 2;
 		Double height = root.getHeight()
@@ -63,6 +64,8 @@ public class EditFilesController {
 		paneImages.setPrefSize(Width, height);
 		return paneImages;
 	}
+	
+	
 
 	public static Scene getEditFilesScene() {
 		return editFilesScene;

@@ -11,11 +11,13 @@ import javax.imageio.stream.ImageInputStream;
 
 import javafx.scene.layout.StackPane;
 
+//Classe responsável por rotacionar as imagens do lote em 90 graus para a direta ou para a esquerda
 public class RotateImage {
 
 	public static final int ROTATE_LEFT = 1;
 	public static final int ROTATE_RIGHT = -1;
-
+	
+// Método responsável por rotacionar a imagem em disco em 90 graus para a direita ou para esquerda
 	public static void rotate90(File input, File output, int direction) {
 		try {
 			ImageInputStream iis = ImageIO.createImageInputStream(input);
@@ -46,7 +48,7 @@ public class RotateImage {
 			e.printStackTrace();
 		}
 	}
-
+// Método responsável por rotacionar a visualização da imagem  em 90 graus para a direita ou para esquerda na janela de edição dos documentos
 	public static void rotateImageView(StackPane image, boolean direction) {
 		if (direction) {
 			image.setRotate(image.getRotate() + 90);

@@ -2,7 +2,7 @@ package utils;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
+//Classe responsável por criar a visualização da imagem do tipo Image javaFX
 public class ImageViewGenerator {
 	private static ImageView imageView = null;
 

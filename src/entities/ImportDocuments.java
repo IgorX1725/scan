@@ -7,6 +7,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import utils.ImageFileToFXImage;
 
+
+//classe responsável por importar arquivo digitais para o lote
+// esta classe é usada quando o usuário já possuir o documento digital e não precisa digitalizar o documento fisco. 
 public class ImportDocuments {
 
 	public static List<File> importFiles(Stage stage) {

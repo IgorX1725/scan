@@ -3,7 +3,9 @@ package entities;
 import java.io.IOException;
 
 import entities.exceptions.DomainExceptions;
-
+//classe responsável por digitalizar os documentos
+//esta classe faz a chamada ao programa NAPS2 por linha de comando
+//NAPS2 é o programa que de fato digitaliza o documento e é instalado a parte 
 public class ScanDocument {
 
 

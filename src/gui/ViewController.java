@@ -33,7 +33,7 @@ import utils.ImageFileToFXImage;
 import utils.ListImagesSelected;
 import utils.MapImages;
 import utils.RotateImage;
-
+//Controlador da GUI View.fxml
 public class ViewController {
 
 	@FXML
@@ -60,7 +60,7 @@ public class ViewController {
 	private static Batch batch = new Batch(source);
 	private String profile = null;
 	private FXMLLoader viewEditFiles = new FXMLLoader(getClass().getResource("/gui/EditFiles.fxml"));
-
+// Metodo responsável por recuperar o ultimo lote manipulado pelo usuário
 	public void retrieveBatch() {
 		if (batch.getLastModified().listFiles().length > 0) {
 			Optional<ButtonType> result = null;
@@ -74,7 +74,7 @@ public class ViewController {
 			batch.getLastModified().delete();
 		}
 	}
-
+// metodo que é responsável por disparar a ação do botão de digitaliação
 	public void onButtonScanAction() {
 		batch.createPath();
 		profile = checkBoxFrontAndBack.isSelected() ? Profiles.FRENTEVERSO.toString().toLowerCase()
@@ -91,7 +91,7 @@ public class ViewController {
 			System.out.println("Ocorreu um Problema: " + e.getMessage());
 		}
 	}
-
+//	metodo que é responsável por disparar a ação do botão de importação de arquivos
 	public void onButtonImportAction() {
 		batch.createPath();
 		FileChannel sourceChannel = null;
@@ -128,7 +128,7 @@ public class ViewController {
 			batch.getLastModified().delete();
 		}
 	}
-
+//	metodo que é responsável por disparar a ação do botão de digitaliação na tela de Edição dos arquivos
 	public void onButtonScanActionEditFiles() {
 		profile = checkBoxFrontAndBack.isSelected() ? Profiles.FRENTEVERSO.toString().toLowerCase()
 				: Profiles.FRENTE.toString().toLowerCase();
@@ -145,7 +145,7 @@ public class ViewController {
 		ImageFileToFXImage.tiffToImageList(ImageFileToFXImage.getNewFiles());
 		EditFilesController.updateImages();
 	}
-
+//	metodo que é responsável por disparar a ação do botão de importação na tela de Edição dos arquivos
 	public void onButtonImportActionEditFiles() {
 		FileChannel sourceChannel = null;
 		FileChannel destinationChannel = null;
@@ -179,13 +179,14 @@ public class ViewController {
 			Alerts.showAlert("Aviso", "", "Nenhum arquivo foi selecionado ", AlertType.WARNING);
 		}
 	}
-	
+//	metodo que é responsável por disparar a ação do botão feito quando o lote estiver pronto para indexar
 	public void onButtonDoneAction() {
 		ListImagesSelected.getInstance().clear();
 		MapImages.getInstance().clear();
 		EditFilesController.closeStage();
 	}
 
+	//	metodo que é responsável por disparar a ação do botão deletar na tela de Edição dos arquivos
 	public void onButtonDeletenAction() {
 		int i = 0;
 
@@ -200,6 +201,7 @@ public class ViewController {
 		EditFilesController.updateImages();
 	}
 
+//	metodo que é responsável por disparar a ação do botão girar para direita na tela de Edição dos arquivos
 	public void onButtonRotateRightAction() {
 		int i = 0;
 		while (i < ListImagesSelected.getInstance().size()) {
@@ -211,6 +213,7 @@ public class ViewController {
 
 	}
 
+//	metodo que é responsável por disparar a ação do botão girar para esquerda na tela de Edição dos arquivos
 	public void onButtonRotateLeftAction() {
 		int i = 0;
 		while (i < ListImagesSelected.getInstance().size()) {
@@ -221,7 +224,8 @@ public class ViewController {
 		}
 
 	}
-
+	
+//	metodo que é responsável por disparar a ação do botão duplicar na tela de Edição dos arquivos
 	public void onButtonCopyAction() {
 		int i = 0;
 		while (i < ListImagesSelected.getInstance().size()) {
