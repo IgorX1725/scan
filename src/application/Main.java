@@ -27,7 +27,6 @@ public class Main extends Application {
 			stage.setResizable(false);
 			AddIconOnScene.add(stage,new Image("\\icons\\X_Icon.png"));
 			stage.show();
-			ViewController.test();
 			controller.retrieveBatch();
 		} catch (IOException e) {
 			e.printStackTrace();

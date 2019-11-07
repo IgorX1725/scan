@@ -17,17 +17,18 @@ import entities.exceptions.DomainExceptions;
 import gui.util.Alerts;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import utils.ActionImageSelected;
+import utils.AddIconOnScene;
 import utils.CopyDocument;
 import utils.DeleteDocument;
 import utils.GetImageFXFromStackPane;
@@ -56,7 +57,9 @@ public class ViewController {
 	@FXML
 	private Button buttonDone = null;
 	@FXML
-	private static MenuBar menuBar = new MenuBar();
+	private MenuItem exit;
+	@FXML
+	private MenuItem about;
 
 	private Stage stage = null;
 	private FileInputStream fileInputStream = null;
@@ -253,14 +256,24 @@ public class ViewController {
 		EditFilesController.updateImages();
 	}
 
-	public static void test() {
-		if (menuBar.getMenus().size() > 0) {
-			List<Menu> menus = menuBar.getMenus();
-		menus.forEach((e) -> {
-			System.out.println(e);
-		});
-		}
+	public void onExitAction() {
+		stage.close();
+	}
 
+	public void onAboutAction() {
+		try {
+			FXMLLoader loader = new FXMLLoader((getClass().getResource("/gui/About.fxml")));
+			AnchorPane anchorPaneAbout;
+			anchorPaneAbout = loader.load();
+			Scene aboutScene = new Scene(anchorPaneAbout);
+			Stage aboutStage = new Stage();
+			aboutStage.setScene(aboutScene);
+			AddIconOnScene.add(aboutStage, new Image("\\icons\\X_icon.png"));
+			aboutStage.setResizable(false);
+			aboutStage.show();
+		} catch (IOException e) {
+			Alerts.showAlert("Erro", "", "Erro ao Exibir a Janela:" + e.getMessage(), AlertType.ERROR);
+		}
 	}
 
 	public static Batch getBatch() {
