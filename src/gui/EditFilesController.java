@@ -9,11 +9,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToolBar;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import utils.AddIconOnScene;
 import utils.GridWithImages;
 import utils.ImageFileToFXImage;
 // Controlador da GUI EditFiles.fxml
@@ -38,6 +40,7 @@ public class EditFilesController {
 				stage.setTitle("Editar Documentos");
 				stage.setScene(editFilesScene);
 				stage.setMaximized(true);
+				AddIconOnScene.add(stage,new Image("\\icons\\X_Icon.png"));
 				stage.show();
 				scrollImages = createPaneImages();
 				root.setRight(scrollImages);

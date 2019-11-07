@@ -22,6 +22,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -33,6 +35,7 @@ import utils.ImageFileToFXImage;
 import utils.ListImagesSelected;
 import utils.MapImages;
 import utils.RotateImage;
+
 //Controlador da GUI View.fxml
 public class ViewController {
 
@@ -52,6 +55,8 @@ public class ViewController {
 	private CheckBox checkBoxFrontAndBackEditFiles = null;
 	@FXML
 	private Button buttonDone = null;
+	@FXML
+	private static MenuBar menuBar = new MenuBar();
 
 	private Stage stage = null;
 	private FileInputStream fileInputStream = null;
@@ -60,6 +65,7 @@ public class ViewController {
 	private static Batch batch = new Batch(source);
 	private String profile = null;
 	private FXMLLoader viewEditFiles = new FXMLLoader(getClass().getResource("/gui/EditFiles.fxml"));
+
 // Metodo responsável por recuperar o ultimo lote manipulado pelo usuário
 	public void retrieveBatch() {
 		if (batch.getLastModified().listFiles().length > 0) {
@@ -74,6 +80,7 @@ public class ViewController {
 			batch.getLastModified().delete();
 		}
 	}
+
 // metodo que é responsável por disparar a ação do botão de digitaliação
 	public void onButtonScanAction() {
 		batch.createPath();
@@ -91,6 +98,7 @@ public class ViewController {
 			System.out.println("Ocorreu um Problema: " + e.getMessage());
 		}
 	}
+
 //	metodo que é responsável por disparar a ação do botão de importação de arquivos
 	public void onButtonImportAction() {
 		batch.createPath();
@@ -123,11 +131,12 @@ public class ViewController {
 				MapImages.getInstance().clear();
 				EditFilesController.showDisplayEditWindow(viewEditFiles, batch.listFiles());
 			}
-		} catch(NullPointerException e) {
+		} catch (NullPointerException e) {
 			Alerts.showAlert("Aviso", "", "Nenhum arquivo foi selecionado ", AlertType.WARNING);
 			batch.getLastModified().delete();
 		}
 	}
+
 //	metodo que é responsável por disparar a ação do botão de digitaliação na tela de Edição dos arquivos
 	public void onButtonScanActionEditFiles() {
 		profile = checkBoxFrontAndBack.isSelected() ? Profiles.FRENTEVERSO.toString().toLowerCase()
@@ -145,6 +154,7 @@ public class ViewController {
 		ImageFileToFXImage.tiffToImageList(ImageFileToFXImage.getNewFiles());
 		EditFilesController.updateImages();
 	}
+
 //	metodo que é responsável por disparar a ação do botão de importação na tela de Edição dos arquivos
 	public void onButtonImportActionEditFiles() {
 		FileChannel sourceChannel = null;
@@ -179,6 +189,7 @@ public class ViewController {
 			Alerts.showAlert("Aviso", "", "Nenhum arquivo foi selecionado ", AlertType.WARNING);
 		}
 	}
+
 //	metodo que é responsável por disparar a ação do botão feito quando o lote estiver pronto para indexar
 	public void onButtonDoneAction() {
 		ListImagesSelected.getInstance().clear();
@@ -186,7 +197,8 @@ public class ViewController {
 		EditFilesController.closeStage();
 	}
 
-	//	metodo que é responsável por disparar a ação do botão deletar na tela de Edição dos arquivos
+	// metodo que é responsável por disparar a ação do botão deletar na tela de
+	// Edição dos arquivos
 	public void onButtonDeletenAction() {
 		int i = 0;
 
@@ -224,7 +236,7 @@ public class ViewController {
 		}
 
 	}
-	
+
 //	metodo que é responsável por disparar a ação do botão duplicar na tela de Edição dos arquivos
 	public void onButtonCopyAction() {
 		int i = 0;
@@ -241,13 +253,23 @@ public class ViewController {
 		EditFilesController.updateImages();
 	}
 
+	public static void test() {
+		if (menuBar.getMenus().size() > 0) {
+			List<Menu> menus = menuBar.getMenus();
+		menus.forEach((e) -> {
+			System.out.println(e);
+		});
+		}
+
+	}
+
+	public static Batch getBatch() {
+		return batch;
+	}
+
 	public void init(Stage stage) {
 		this.stage = stage;
 
-	}
-	
-	public static Batch getBatch(){
-		return batch;
 	}
 
 }

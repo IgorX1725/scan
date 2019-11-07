@@ -5,9 +5,11 @@ import java.io.IOException;
 import gui.ViewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
+import utils.AddIconOnScene;
 
 
 public class Main extends Application {
@@ -23,7 +25,9 @@ public class Main extends Application {
 			Scene scene = new Scene(parent);
 			stage.setScene(scene);
 			stage.setResizable(false);
+			AddIconOnScene.add(stage,new Image("\\icons\\X_Icon.png"));
 			stage.show();
+			ViewController.test();
 			controller.retrieveBatch();
 		} catch (IOException e) {
 			e.printStackTrace();
