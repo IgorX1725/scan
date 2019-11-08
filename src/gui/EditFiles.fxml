@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="1078.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ViewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="1078.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.EditFilesController">
    <top>
       <AnchorPane prefHeight="45.0" prefWidth="1078.0" BorderPane.alignment="CENTER">
          <children>
@@ -21,12 +21,12 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <CheckBox fx:id="checkBoxFrontAndBack" layoutX="140.0" layoutY="13.0" mnemonicParsing="false" text="Frente e verso">
+            <CheckBox fx:id="checkBoxFrontAndBackEditFiles" layoutX="140.0" layoutY="13.0" mnemonicParsing="false" text="Frente e verso">
                <font>
                   <Font size="14.0" />
                </font>
             </CheckBox>
-            <Button fx:id="buttonScan" layoutX="514.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#onButtonDoneAction" text="Feito">
+            <Button fx:id="buttonDone" layoutX="514.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#onButtonDoneAction" text="Feito">
                <font>
                   <Font size="14.0" />
                </font>

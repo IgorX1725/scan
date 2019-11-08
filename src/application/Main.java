@@ -26,6 +26,7 @@ public class Main extends Application {
 			stage.setScene(scene);
 			stage.setResizable(false);
 			AddIconOnScene.add(stage,new Image("\\icons\\X_Icon.png"));
+			stage.setTitle("ScannerX");
 			stage.show();
 			controller.retrieveBatch();
 		} catch (IOException e) {

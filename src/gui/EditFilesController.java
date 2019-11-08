@@ -1,12 +1,30 @@
 package gui;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import application.Main;
+import entities.Batch;
+import entities.ImportDocuments;
+import entities.SaveBatchProperties;
+import entities.ScanDocument;
+import entities.enums.Profiles;
+import entities.exceptions.DomainExceptions;
+import gui.util.Alerts;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
@@ -15,23 +33,52 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import utils.ActionImageSelected;
 import utils.AddIconOnScene;
+import utils.CopyDocument;
+import utils.DeleteDocument;
+import utils.GetImageFXFromStackPane;
 import utils.GridWithImages;
 import utils.ImageFileToFXImage;
+import utils.ListImagesSelected;
+import utils.MapImages;
+import utils.RotateImage;
+
 // Controlador da GUI EditFiles.fxml
 public class EditFilesController {
-
+	@FXML
+	private Button buttonScanEditFiles = null;
+	@FXML
+	private Button buttonImportEditFiles = null;
+	@FXML
+	private CheckBox checkBoxFrontAndBackEditFiles = null;
+	@FXML
+	private Button buttonDone = null;
+	@FXML
+	private MenuItem exit;
+	@FXML
+	private MenuItem about;
+	@FXML
+	private AnchorPane anchorPanelistDocuments = null;
+	
+	private static String source = SaveBatchProperties.getSource();
+	private static Batch batch = new Batch(source);
+	private FileInputStream fileInputStream = null;
+	private FileOutputStream fileOutputStream = null;
 	private static Scene editFilesScene = null;
 	private static BorderPane root = null;
 	private static Stage stage = null;
 	private static ScrollPane scrollImages = null;
 	private final static Set<KeyCode> pressedKeys = new HashSet<>();
-	
-	//Metodo para exibir a janela de edição dos documentos do lote
-	public static void showDisplayEditWindow(FXMLLoader fxml, File[] list) {
+	private static FXMLLoader viewEditFiles = null;
+	private String profile = null;
+
+	// Metodo para exibir a janela de edição dos documentos do lote
+	public static void showDisplayEditWindow(File[] list) {
 		try {
 			if (stage == null) {
-				root = fxml.load();
+				viewEditFiles = new FXMLLoader(EditFilesController.class.getResource("/gui/EditFiles.fxml"));
+				root = viewEditFiles.load();
 				editFilesScene = new Scene(root);
 				ImageFileToFXImage.tiffToImageList(list);
 				stage = new Stage();
@@ -40,11 +87,11 @@ public class EditFilesController {
 				stage.setTitle("Editar Documentos");
 				stage.setScene(editFilesScene);
 				stage.setMaximized(true);
-				AddIconOnScene.add(stage,new Image("\\icons\\X_Icon.png"));
+				AddIconOnScene.add(stage, new Image("\\icons\\X_Icon.png"));
 				stage.show();
 				scrollImages = createPaneImages();
 				root.setRight(scrollImages);
-			}else {
+			} else {
 				ImageFileToFXImage.tiffToImageList(list);
 				updateImages();
 				stage.show();
@@ -57,13 +104,15 @@ public class EditFilesController {
 		}
 	}
 
-	//Metodo para atualizar a visualização dos documentos quando houver alguma alteração no lote
+	// Metodo para atualizar a visualização dos documentos quando houver alguma
+	// alteração no lote
 	public static void updateImages() {
 		root.setRight(null);
 		ScrollPane paneImages = createPaneImages();
 		root.setRight(paneImages);
 
 	}
+
 // Metodo para criar o painel das imagens presentes no lote
 	private static ScrollPane createPaneImages() {
 		Double Width = root.getWidth() / 2;
@@ -73,7 +122,121 @@ public class EditFilesController {
 		paneImages.setPrefSize(Width, height);
 		return paneImages;
 	}
-	
+
+//	metodo que é responsável por disparar a ação do botão de digitaliação na tela de Edição dos arquivos
+	public void onButtonScanActionEditFiles() {
+		profile = checkBoxFrontAndBackEditFiles.isSelected() ? Profiles.FRENTEVERSO.toString().toLowerCase()
+				: Profiles.FRENTE.toString().toLowerCase();
+		try {
+			ScanDocument.scanningDocument("cmd /c naps2.console -o " + batch.getSource()
+					+ "\"\\$(n).tiff\" --split --progress -p " + profile);
+		} catch (IOException e) {
+			Alerts.showAlert("Erro", "", "Ocorreu um erro ao criar o lote:" + e.getMessage(), AlertType.ERROR);
+		} catch (DomainExceptions e) {
+			Alerts.showAlert("Alerta", "", "Ocorreu um Problema: " + e.getMessage(), AlertType.WARNING);
+		}
+		ImageFileToFXImage.tiffToImageList(ImageFileToFXImage.getNewFiles());
+		EditFilesController.updateImages();
+	}
+
+//	metodo que é responsável por disparar a ação do botão de importação na tela de Edição dos arquivos
+	public void onButtonImportActionEditFiles() {
+		FileChannel sourceChannel = null;
+		FileChannel destinationChannel = null;
+		List<File> files;
+		try {
+			files = ImportDocuments.importFiles(EditFilesController.stage);
+
+			for (File file : files) {
+				try {
+					fileInputStream = new FileInputStream(file.getAbsolutePath());
+					sourceChannel = fileInputStream.getChannel();
+					fileOutputStream = new FileOutputStream(batch.getSource() + "\\" + file.getName());
+					destinationChannel = fileOutputStream.getChannel();
+					sourceChannel.transferTo(0, sourceChannel.size(), destinationChannel);
+					if (sourceChannel != null && sourceChannel.isOpen())
+						sourceChannel.close();
+					if (destinationChannel != null && destinationChannel.isOpen())
+						destinationChannel.close();
+					EditFilesController.updateImages();
+				} catch (FileNotFoundException e) {
+					Alerts.showAlert("Erro", "", "Ocorreu um erro ao importar o arquivo para o lote: " + e.getMessage(),
+							AlertType.ERROR);
+					e.printStackTrace();
+				} catch (IOException e) {
+					Alerts.showAlert("Erro", "", "Ocorreu um erro ao importar o arquivo: " + e.getMessage(),
+							AlertType.ERROR);
+					e.printStackTrace();
+				}
+			}
+		} catch (NullPointerException e) {
+			Alerts.showAlert("Aviso", "", "Nenhum arquivo foi selecionado ", AlertType.WARNING);
+		}
+	}
+
+//	metodo que é responsável por disparar a ação do botão feito quando o lote estiver pronto para indexar
+	public void onButtonDoneAction() {
+		ListImagesSelected.getInstance().clear();
+		MapImages.getInstance().clear();
+		EditFilesController.closeStage();
+	}
+
+	// metodo que é responsável por disparar a ação do botão deletar na tela de
+	// Edição dos arquivos
+	public void onButtonDeletenAction() {
+		int i = 0;
+
+		while (i < ListImagesSelected.getInstance().size()) {
+			Image imageFX = GetImageFXFromStackPane.get(ListImagesSelected.getInstance().get(i));
+			DeleteDocument.deleteFile(MapImages.getInstance().get(imageFX));
+			MapImages.getInstance().remove(imageFX);
+			i++;
+		}
+		ActionImageSelected.getPanelImage().clearPane();
+		ListImagesSelected.getInstance().clear();
+		EditFilesController.updateImages();
+	}
+
+//	metodo que é responsável por disparar a ação do botão girar para direita na tela de Edição dos arquivos
+	public void onButtonRotateRightAction() {
+		int i = 0;
+		while (i < ListImagesSelected.getInstance().size()) {
+			Image imageFX = GetImageFXFromStackPane.get(ListImagesSelected.getInstance().get(i));
+			RotateImage.rotate90(MapImages.getInstance().get(imageFX), MapImages.getInstance().get(imageFX), -1);
+			RotateImage.rotateImageView(ListImagesSelected.getInstance().get(i), true);
+			i++;
+		}
+
+	}
+
+//	metodo que é responsável por disparar a ação do botão girar para esquerda na tela de Edição dos arquivos
+	public void onButtonRotateLeftAction() {
+		int i = 0;
+		while (i < ListImagesSelected.getInstance().size()) {
+			Image imageFX = GetImageFXFromStackPane.get(ListImagesSelected.getInstance().get(i));
+			RotateImage.rotate90(MapImages.getInstance().get(imageFX), MapImages.getInstance().get(imageFX), 1);
+			RotateImage.rotateImageView(ListImagesSelected.getInstance().get(i), false);
+			i++;
+		}
+
+	}
+
+//	metodo que é responsável por disparar a ação do botão duplicar na tela de Edição dos arquivos
+	public void onButtonCopyAction() {
+		int i = 0;
+		while (i < ListImagesSelected.getInstance().size()) {
+			try {
+				CopyDocument.copy(MapImages.getInstance()
+						.get(GetImageFXFromStackPane.get(ListImagesSelected.getInstance().get(i))).getAbsolutePath());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			i++;
+		}
+		ListImagesSelected.getInstance().clear();
+		EditFilesController.updateImages();
+	}
+
 	public static Set<KeyCode> getPressedkeys() {
 		return pressedKeys;
 	}
