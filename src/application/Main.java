@@ -13,7 +13,12 @@ import utils.AddIconOnScene;
 
 
 public class Main extends Application {
-	public static Stage stage;
+	private static Stage stage;
+	
+	public static Stage getStage() {
+		return stage;
+	}
+
 	@Override
 	public void start(Stage stage) {
 		try {

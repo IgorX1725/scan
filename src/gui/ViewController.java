@@ -10,24 +10,20 @@ import java.util.List;
 import java.util.Optional;
 
 import entities.Batch;
-import entities.ImportDocuments;
+import entities.WindowExplorerCreator;
 import entities.SaveBatchProperties;
 import entities.ScanDocument;
 import entities.enums.Profiles;
 import entities.exceptions.DomainExceptions;
 import gui.util.Alerts;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
-import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
-import utils.AddIconOnScene;
 import utils.MapImages;
 
 //Controlador da GUI View.fxml
@@ -39,6 +35,12 @@ public class ViewController {
 	private Button buttonImport = null;
 	@FXML
 	private CheckBox checkBoxFrontAndBack = new CheckBox();
+	@FXML
+	private MenuItem exit;
+	@FXML
+	private MenuItem about;
+	@FXML
+	private MenuItem MenuItemsource;
 
 	private Stage stage = null;
 	private FileInputStream fileInputStream = null;
@@ -86,7 +88,7 @@ public class ViewController {
 		FileChannel destinationChannel = null;
 		List<File> files;
 		try {
-			files = ImportDocuments.importFiles(this.stage);
+			files = WindowExplorerCreator.importFiles(this.stage);
 
 			for (File file : files) {
 				try {
@@ -117,9 +119,6 @@ public class ViewController {
 		}
 	}
 
-
-
-
 // Metodo que é responsável por disparar a ação do item de menu arquivo > sair
 	public void onExitAction() {
 		stage.close();
@@ -127,20 +126,11 @@ public class ViewController {
 
 	// Metodo que é responsável por disparar a ação do item de menu ajuda > sobre
 	public void onAboutAction() {
-		try {
-			FXMLLoader loader = new FXMLLoader((getClass().getResource("/gui/About.fxml")));
-			AnchorPane anchorPaneAbout;
-			anchorPaneAbout = loader.load();
-			Scene aboutScene = new Scene(anchorPaneAbout);
-			Stage aboutStage = new Stage();
-			aboutStage.setScene(aboutScene);
-			AddIconOnScene.add(aboutStage, new Image("\\icons\\X_icon.png"));
-			aboutStage.setResizable(false);
-			aboutStage.setTitle("Sobre");
-			aboutStage.show();
-		} catch (IOException e) {
-			Alerts.showAlert("Erro", "", "Erro ao Exibir a Janela:" + e.getMessage(), AlertType.ERROR);
-		}
+		AboutController.showWindow();
+	}
+	
+	public void onMenuItemSourceAction() {
+		BatchController.showWindow();
 	}
 
 	public static Batch getBatch() {

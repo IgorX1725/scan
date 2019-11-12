@@ -10,36 +10,36 @@ import gui.util.Alerts;
 import javafx.scene.control.Alert.AlertType;
 
 public class SaveBatchProperties {
-	
-	static String sourceProperties = (SaveBatchProperties.class.getResource("batch.conf")).toString();
+
+	static String sourceProperties = null;
 	static String source = null;
 
 	public static String getSource() {
-		sourceProperties = sourceProperties.replace("file:/","");
+		sourceProperties = SaveBatchProperties.class.getResource("batch.conf").toString();
+		sourceProperties = sourceProperties.replace("file:/", "");
+
 		try (FileInputStream input = new FileInputStream(sourceProperties)) {
 
 			Properties prop = new Properties();
 
 			prop.load(input);
+			if (prop.containsKey("source")) {
 
-			if (prop.contains("source")) {
 				source = prop.getProperty("source");
-			} else {
-				FileOutputStream output = new FileOutputStream(sourceProperties);
-				prop = new Properties();
-				prop.setProperty("source", "C:\\temp\\lote");
-				prop.store(output, null);
-				source = prop.getProperty("source");
+			}else {
+				setSource("source","C:\\Temp");
 			}
+
 		} catch (IOException io) {
 			Alerts.showAlert("Erro", "", "ocorreu um erro ao acessar esta opção: " + io.getMessage(), AlertType.ERROR);
 		}
 		return source;
 	}
 
-	public void setSource(String key, String value) {
-
-		try (OutputStream output = new FileOutputStream("batch.conf")) {
+	public static String setSource(String key, String value) {
+		sourceProperties = SaveBatchProperties.class.getResource("batch.conf").toString();
+		sourceProperties = sourceProperties.replace("file:/", "");
+		try (OutputStream output = new FileOutputStream(sourceProperties)) {
 			Properties prop = new Properties();
 			prop.setProperty(key, value);
 			prop.store(output, null);
@@ -47,6 +47,38 @@ public class SaveBatchProperties {
 		} catch (IOException io) {
 			Alerts.showAlert("Erro", "", "ocorreu um erro ao salvar: " + io.getMessage(), AlertType.ERROR);
 		}
+		return SaveBatchProperties.getSource();
 	}
-
 }
+
+//
+//	public static String getSource() {
+//		sourceProperties = sourceProperties.replace("file:/", "");
+//		System.out.println(sourceProperties);
+//		try (FileInputStream input = new FileInputStream(sourceProperties)) {
+//
+//			Properties prop = new Properties();
+//
+//			prop.load(input);
+//			source = prop.getProperty(sourceProperties,"c:\\temp\\lote");
+//
+//		} catch (IOException io) {
+//			Alerts.showAlert("Erro", "", "ocorreu um erro ao acessar esta opção: " + io.getMessage(), AlertType.ERROR);
+//		}
+//		return source;
+//	}
+//
+//	public static void setSource(String key, String value) {
+//		sourceProperties = sourceProperties.replace("file:/", "");
+//		try (OutputStream output = new FileOutputStream(sourceProperties)) {
+//			System.out.println(source);
+//			Properties prop = new Properties();
+//			prop.setProperty(key, value);
+//			prop.store(output, null);
+//
+//		} catch (IOException io) {
+//			Alerts.showAlert("Erro", "", "ocorreu um erro ao salvar: " + io.getMessage(), AlertType.ERROR);
+//		}
+//	}
+
+//}

@@ -12,7 +12,7 @@ import java.util.Set;
 
 import application.Main;
 import entities.Batch;
-import entities.ImportDocuments;
+import entities.WindowExplorerCreator;
 import entities.SaveBatchProperties;
 import entities.ScanDocument;
 import entities.enums.Profiles;
@@ -24,7 +24,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
@@ -55,10 +54,6 @@ public class EditFilesController {
 	@FXML
 	private Button buttonDone = null;
 	@FXML
-	private MenuItem exit;
-	@FXML
-	private MenuItem about;
-	@FXML
 	private AnchorPane anchorPanelistDocuments = null;
 	
 	private static String source = SaveBatchProperties.getSource();
@@ -83,7 +78,7 @@ public class EditFilesController {
 				ImageFileToFXImage.tiffToImageList(list);
 				stage = new Stage();
 				stage.initModality(Modality.WINDOW_MODAL);
-				stage.initOwner(Main.stage);
+				stage.initOwner(Main.getStage());
 				stage.setTitle("Editar Documentos");
 				stage.setScene(editFilesScene);
 				stage.setMaximized(true);
@@ -113,7 +108,7 @@ public class EditFilesController {
 
 	}
 
-// Metodo para criar o painel das imagens presentes no lote
+// Metodo para criar o painel dos documentos presentes no lote
 	private static ScrollPane createPaneImages() {
 		Double Width = root.getWidth() / 2;
 		Double height = root.getHeight()
@@ -145,7 +140,7 @@ public class EditFilesController {
 		FileChannel destinationChannel = null;
 		List<File> files;
 		try {
-			files = ImportDocuments.importFiles(EditFilesController.stage);
+			files = WindowExplorerCreator.importFiles(stage);
 
 			for (File file : files) {
 				try {
@@ -235,6 +230,16 @@ public class EditFilesController {
 		}
 		ListImagesSelected.getInstance().clear();
 		EditFilesController.updateImages();
+	}
+	
+	
+
+	public static void setSource(String source) {
+		EditFilesController.source = source;
+	}
+
+	public static String getSource() {
+		return source;
 	}
 
 	public static Set<KeyCode> getPressedkeys() {
