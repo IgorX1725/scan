@@ -14,9 +14,9 @@ public class MousePressedEvent implements EventHandler<MouseEvent>{
 	public void handle(MouseEvent e) {
 		StackPane image = (StackPane) e.getSource();
         if (e.getButton() == MouseButton.PRIMARY && EditFilesController.getPressedkeys().contains(KeyCode.CONTROL)) {
-			ActionImageSelected.mouseClickedAndButtonCtrlPressed(image);
+			ActionImageSelected.mouseClickedAndButtonCtrlPressed(ListDocuments.containsStackImage(image));
         }else {
-			ActionImageSelected.mouseClickedOnly(image);
+			ActionImageSelected.mouseClickedOnly(ListDocuments.containsStackImage(image));
         }
 	}
 

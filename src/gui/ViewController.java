@@ -24,7 +24,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
-import utils.MapImages;
+import utils.ListDocuments;
 
 //Controlador da GUI View.fxml
 public class ViewController {
@@ -110,7 +110,7 @@ public class ViewController {
 							AlertType.ERROR);
 					e.printStackTrace();
 				}
-				MapImages.getInstance().clear();
+				ListDocuments.getInstance().clear();
 				EditFilesController.showDisplayEditWindow(batch.listFiles());
 			}
 		} catch (NullPointerException e) {

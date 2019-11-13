@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import entities.DocumentX;
 import gui.ViewController;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
@@ -26,8 +27,8 @@ public class ImageFileToFXImage {
 			result = new BufferedImage(tiff.getWidth(), tiff.getHeight(), BufferedImage.TYPE_INT_RGB);
 			result.createGraphics().drawImage(tiff, 0, 0, Color.WHITE, null);
 			imageFX = SwingFXUtils.toFXImage(result, null);
-			//Armazena a imagem convertida no Map de imagens presentes no lote
-			MapImages.getInstance().put(imageFX, imageFile);
+			//Armazena a imagem convertida na lista de imagens presentes no lote
+			ListDocuments.getInstance().add(new DocumentX(imageFile, imageFX));
 			return true;
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -44,7 +45,7 @@ public class ImageFileToFXImage {
 		return true;
 	}
 	
-//método que converte a imagem do tipo File para imagemFX sem adiciona-la no Map de imagens presentes no lote
+//método que converte a imagem do tipo File para imagemFX sem adiciona-la na lista de imagens presentes no lote
 	public static Image toImageFX(File image) {
 		try {
 			tiff = ImageIO.read(image);
@@ -58,14 +59,15 @@ public class ImageFileToFXImage {
 		}
 
 	}
-// Método que retorna os arquivos que estão no lote e ainda não foram adicionados no Map
+// Método que retorna os arquivos que estão no lote e ainda não foram adicionados na lista de imagens
 	public static File[] getNewFiles() {
 
 		File[] batch = ViewController.getBatch().listFiles();
 		List<File> newImages = new ArrayList<>();
 
 		for (File image : batch) {
-			if (!MapImages.getInstance().containsValue(image)) {
+			for(DocumentX document : ListDocuments.getInstance())
+			if (!document.getFileDocument().equals(image)) {
 				newImages.add(image);
 			}
 		}

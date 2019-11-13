@@ -3,19 +3,19 @@ package utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.layout.StackPane;
+import entities.DocumentX;
 
 // Classe responsável por criar e retornar o Singleton da lista dos arquivos que estão sendo selecionados na janela de edição para serem editadas 
-public class ListImagesSelected {
+public class ListDocumentsSelected {
 
 	
-	private static List<StackPane> images = null;
+	private static List<DocumentX> images = null;
 
-	private ListImagesSelected() {}
+	private ListDocumentsSelected() {}
 	
-	public static List<StackPane> getInstance(){
+	public static List<DocumentX> getInstance(){
 		if(images == null) {
-			images = new ArrayList<StackPane>();
+			images = new ArrayList<DocumentX>();
 		}else {
 			return images;
 		}

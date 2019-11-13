@@ -1,7 +1,7 @@
 package utils;
 
+import entities.DocumentX;
 import javafx.geometry.Insets;
-import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 //Classe responsável por criar o Painel Grid das imagens imagens do lote em miniatura 
@@ -14,12 +14,13 @@ public class GridWithImages {
 			gridPane = new GridPane();
 			int x = 0;
 			int y = 0;
-			for (Image imageKey : MapImages.getInstance().keySet()) {
+			for (DocumentX image : ListDocuments.getInstance()) {
 				if (x > 2) {
 					y++;
 					x = 0;
 				}
-				StackPane stackImage = new StackPane(ImageViewGenerator.create(imageKey, 200, 300));
+				StackPane stackImage = new StackPane(ImageViewGenerator.create(image.getImageFX(), 200, 300));
+				image.setStackImage(stackImage);
 				stackImage.setOnMousePressed(mousePressedEvent);
 				gridPane.add(stackImage, x, y);
 				GridPane.setMargin(stackImage, new Insets(7, 50, 7, 50));

@@ -12,9 +12,10 @@ import java.util.Set;
 
 import application.Main;
 import entities.Batch;
-import entities.WindowExplorerCreator;
+import entities.DocumentX;
 import entities.SaveBatchProperties;
 import entities.ScanDocument;
+import entities.WindowExplorerCreator;
 import entities.enums.Profiles;
 import entities.exceptions.DomainExceptions;
 import gui.util.Alerts;
@@ -36,11 +37,10 @@ import utils.ActionImageSelected;
 import utils.AddIconOnScene;
 import utils.CopyDocument;
 import utils.DeleteDocument;
-import utils.GetImageFXFromStackPane;
 import utils.GridWithImages;
 import utils.ImageFileToFXImage;
-import utils.ListImagesSelected;
-import utils.MapImages;
+import utils.ListDocuments;
+import utils.ListDocumentsSelected;
 import utils.RotateImage;
 
 // Controlador da GUI EditFiles.fxml
@@ -171,64 +171,51 @@ public class EditFilesController {
 
 //	metodo que é responsável por disparar a ação do botão feito quando o lote estiver pronto para indexar
 	public void onButtonDoneAction() {
-		ListImagesSelected.getInstance().clear();
-		MapImages.getInstance().clear();
+		ListDocumentsSelected.getInstance().clear();
+		ListDocuments.getInstance().clear();
 		EditFilesController.closeStage();
 	}
 
 	// metodo que é responsável por disparar a ação do botão deletar na tela de
 	// Edição dos arquivos
 	public void onButtonDeletenAction() {
-		int i = 0;
-
-		while (i < ListImagesSelected.getInstance().size()) {
-			Image imageFX = GetImageFXFromStackPane.get(ListImagesSelected.getInstance().get(i));
-			DeleteDocument.deleteFile(MapImages.getInstance().get(imageFX));
-			MapImages.getInstance().remove(imageFX);
-			i++;
+			for(DocumentX document : ListDocumentsSelected.getInstance()) {
+			DeleteDocument.deleteFile(document.getFileDocument());
+			ListDocuments.getInstance().remove(document);
 		}
 		ActionImageSelected.getPanelImage().clearPane();
-		ListImagesSelected.getInstance().clear();
+		ListDocumentsSelected.getInstance().clear();
 		EditFilesController.updateImages();
 	}
 
 //	metodo que é responsável por disparar a ação do botão girar para direita na tela de Edição dos arquivos
 	public void onButtonRotateRightAction() {
-		int i = 0;
-		while (i < ListImagesSelected.getInstance().size()) {
-			Image imageFX = GetImageFXFromStackPane.get(ListImagesSelected.getInstance().get(i));
-			RotateImage.rotate90(MapImages.getInstance().get(imageFX), MapImages.getInstance().get(imageFX), -1);
-			RotateImage.rotateImageView(ListImagesSelected.getInstance().get(i), true);
-			i++;
+		for(DocumentX document :  ListDocumentsSelected.getInstance()) {
+			RotateImage.rotate90(document.getFileDocument(), document.getFileDocument(), -1);
+			RotateImage.rotateImageView(document.getStackImage(), true);
 		}
 
 	}
 
 //	metodo que é responsável por disparar a ação do botão girar para esquerda na tela de Edição dos arquivos
 	public void onButtonRotateLeftAction() {
-		int i = 0;
-		while (i < ListImagesSelected.getInstance().size()) {
-			Image imageFX = GetImageFXFromStackPane.get(ListImagesSelected.getInstance().get(i));
-			RotateImage.rotate90(MapImages.getInstance().get(imageFX), MapImages.getInstance().get(imageFX), 1);
-			RotateImage.rotateImageView(ListImagesSelected.getInstance().get(i), false);
-			i++;
+			for(DocumentX document : ListDocumentsSelected.getInstance()) {
+			RotateImage.rotate90(document.getFileDocument(), document.getFileDocument(), 1);
+			RotateImage.rotateImageView(document.getStackImage(), false);
 		}
 
 	}
 
 //	metodo que é responsável por disparar a ação do botão duplicar na tela de Edição dos arquivos
 	public void onButtonCopyAction() {
-		int i = 0;
-		while (i < ListImagesSelected.getInstance().size()) {
+		for(DocumentX document : ListDocumentsSelected.getInstance())
 			try {
-				CopyDocument.copy(MapImages.getInstance()
-						.get(GetImageFXFromStackPane.get(ListImagesSelected.getInstance().get(i))).getAbsolutePath());
+				CopyDocument.copy(document.getFileDocument().getAbsolutePath());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			i++;
-		}
-		ListImagesSelected.getInstance().clear();
+		
+		ListDocumentsSelected.getInstance().clear();
 		EditFilesController.updateImages();
 	}
 	
