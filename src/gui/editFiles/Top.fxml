@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="45.0" prefWidth="1078.0" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.editFiles.TopController">
+        <children>
+           <Button fx:id="buttonScanEditFiles" layoutX="26.0" layoutY="10.0" mnemonicParsing="false" onAction="#onButtonScanActionEditFiles" text="Digitalizar" AnchorPane.leftAnchor="25.0">
+              <font>
+                 <Font size="14.0" />
+              </font>
+           </Button>
+           <Button fx:id="buttonImportEditFiles" layoutX="991.0" layoutY="10.0" mnemonicParsing="false" onAction="#onButtonImportActionEditFiles" text="Importar" AnchorPane.rightAnchor="25.0">
+              <font>
+                 <Font size="14.0" />
+              </font>
+           </Button>
+           <CheckBox fx:id="checkBoxFrontAndBackEditFiles" layoutX="140.0" layoutY="13.0" mnemonicParsing="false" text="Frente e verso">
+              <font>
+                 <Font size="14.0" />
+              </font>
+           </CheckBox>
+           <Button fx:id="index" alignment="CENTER" layoutX="494.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" mnemonicParsing="false" onAction="#onButtonIndexAction" text="indexar">
+              <font>
+                 <Font size="14.0" />
+              </font>
+           </Button>
+        </children>
+     </AnchorPane>

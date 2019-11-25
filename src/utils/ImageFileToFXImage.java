@@ -10,7 +10,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import entities.DocumentX;
-import gui.ViewController;
+import gui.main.MainController;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
@@ -19,6 +19,7 @@ public class ImageFileToFXImage {
 	private static BufferedImage tiff = null;
 	private static BufferedImage result = null;
 	private static Image imageFX = null;
+
 //método que converte a imagem do tipo File para imagemFX
 	public static boolean tiffToImage(File imageFile) {
 
@@ -27,7 +28,7 @@ public class ImageFileToFXImage {
 			result = new BufferedImage(tiff.getWidth(), tiff.getHeight(), BufferedImage.TYPE_INT_RGB);
 			result.createGraphics().drawImage(tiff, 0, 0, Color.WHITE, null);
 			imageFX = SwingFXUtils.toFXImage(result, null);
-			//Armazena a imagem convertida na lista de imagens presentes no lote
+			// Armazena a imagem convertida na lista de imagens presentes no lote
 			ListDocuments.getInstance().add(new DocumentX(imageFile, imageFX));
 			return true;
 		} catch (IOException e) {
@@ -36,6 +37,7 @@ public class ImageFileToFXImage {
 		}
 
 	}
+
 //	método que recebe a imagem do tipo File para imagemFX em quantidade acima de um arquivo
 	public static boolean tiffToImageList(File[] listFiles) {
 
@@ -44,7 +46,7 @@ public class ImageFileToFXImage {
 		}
 		return true;
 	}
-	
+
 //método que converte a imagem do tipo File para imagemFX sem adiciona-la na lista de imagens presentes no lote
 	public static Image toImageFX(File image) {
 		try {
@@ -59,15 +61,15 @@ public class ImageFileToFXImage {
 		}
 
 	}
+
 // Método que retorna os arquivos que estão no lote e ainda não foram adicionados na lista de imagens
 	public static File[] getNewFiles() {
 
-		File[] batch = ViewController.getBatch().listFiles();
+		File[] batch = MainController.getBatch().listFiles();
 		List<File> newImages = new ArrayList<>();
 
 		for (File image : batch) {
-			for(DocumentX document : ListDocuments.getInstance())
-			if (!document.getFileDocument().equals(image)) {
+			if (ListDocuments.containsFile(image) == null) {
 				newImages.add(image);
 			}
 		}

@@ -1,9 +1,12 @@
-package utils;
+package gui.editFiles;
 
 import entities.DocumentX;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import utils.ImageViewGenerator;
+import utils.ListDocuments;
+import utils.MousePressedEvent;
 //Classe responsável por criar o Painel Grid das imagens imagens do lote em miniatura 
 public class GridWithImages {
 

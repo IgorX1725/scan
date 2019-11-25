@@ -1,12 +1,12 @@
 package utils;
 
 import entities.DocumentX;
+import gui.editFiles.LeftController;
 import javafx.scene.image.Image;
 
 //Classe responsável por disparar a ação quando um documento é selecionado
 public class ActionImageSelected {
-	private static PanelLeftImage panelImage = new PanelLeftImage();
-	static Image imageFX = null;
+	private static Image imageFX = null;
 
 //Método responsável por adicionar a imagem selecionada na lista de imagens selecionadas (ListImagesSelected)
 	public static void mouseClickedOnly(DocumentX image) {
@@ -17,7 +17,7 @@ public class ActionImageSelected {
 		}
 		ListDocumentsSelected.getInstance().add(image);
 		imageFX = image.getImageFX();
-		panelImage.create(imageFX);
+		LeftController.create(imageFX);
 		image.getStackImage().setStyle("-fx-border-style: solid");
 	}
 
@@ -26,13 +26,9 @@ public class ActionImageSelected {
 		if (!ListDocumentsSelected.getInstance().contains(image)) {
 			ListDocumentsSelected.getInstance().add(image);
 			imageFX = image.getImageFX();
-			panelImage.create(imageFX);
+			LeftController.create(imageFX);
 			image.getStackImage().setStyle("-fx-border-style: solid");
 		}
-	}
-
-	public static PanelLeftImage getPanelImage() {
-		return panelImage;
 	}
 
 }

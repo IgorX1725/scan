@@ -1,4 +1,4 @@
-package gui;
+package gui.main;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,6 +15,9 @@ import entities.SaveBatchProperties;
 import entities.ScanDocument;
 import entities.enums.Profiles;
 import entities.exceptions.DomainExceptions;
+import gui.about.AboutController;
+import gui.editFiles.EditFilesController;
+import gui.sourceBatch.BatchController;
 import gui.util.Alerts;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -27,7 +30,7 @@ import javafx.stage.Stage;
 import utils.ListDocuments;
 
 //Controlador da GUI View.fxml
-public class ViewController {
+public class MainController {
 
 	@FXML
 	private Button buttonScan = null;

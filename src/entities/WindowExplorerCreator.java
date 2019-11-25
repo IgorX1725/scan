@@ -3,7 +3,6 @@ package entities;
 import java.io.File;
 import java.util.List;
 
-import gui.EditFilesController;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -30,7 +29,7 @@ public class WindowExplorerCreator {
 	public static String getSource(Stage stage) {
 		DirectoryChooser directoreChooser = new DirectoryChooser();
 		directoreChooser.setTitle("Selecionar o caminho desejado");
-		directoreChooser.setInitialDirectory(new File(EditFilesController.getSource()));
+		directoreChooser.setInitialDirectory(new File(SaveBatchProperties.getSource()));
 		File dir = directoreChooser.showDialog(stage);
 		return dir.getAbsolutePath();
 	}

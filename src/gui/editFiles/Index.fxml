@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" prefWidth="636.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.editFiles.IndexController">
+   <children>
+      <TextField fx:id="textFieldRA" layoutX="42.0" layoutY="41.0" prefHeight="25.0" prefWidth="450.0" promptText="Digite o RA" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="144.0" />
+      <TextField fx:id="textFieldName" layoutX="42.0" layoutY="92.0" prefHeight="25.0" prefWidth="553.0" promptText="Nome" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" />
+      <TextField fx:id="textFieldCPF" layoutX="42.0" layoutY="136.0" prefHeight="25.0" prefWidth="553.0" promptText="CPF" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" />
+      <Button fx:id="consultButton" layoutX="511.0" layoutY="39.0" mnemonicParsing="false" onAction="#onButtonConsultAction" prefHeight="30.0" prefWidth="82.0" text="Consultar" AnchorPane.leftAnchor="511.0" AnchorPane.rightAnchor="43.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Separator layoutX="6.0" layoutY="188.0" prefHeight="4.0" prefWidth="623.0" />
+      <ComboBox fx:id="comboBoxLevel" layoutX="42.0" layoutY="217.0" prefHeight="25.0" prefWidth="553.0" promptText="Selecione o Nível" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" />
+      <ComboBox fx:id="comboBoxCategory" layoutX="41.0" layoutY="294.0" prefHeight="25.0" prefWidth="553.0" promptText="Selecione a categoria do documento" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" />
+      <ComboBox fx:id="comboBoxType" layoutX="42.0" layoutY="334.0" prefHeight="25.0" prefWidth="553.0" promptText="Selecione o tipo do documento" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" />
+      <ComboBox fx:id="comboBoxCourse" layoutX="42.0" layoutY="257.0" prefHeight="25.0" prefWidth="553.0" promptText="selecione o curso" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" />
+      <TextField fx:id="processNumberTextField" layoutX="42.0" layoutY="373.0" prefHeight="25.0" prefWidth="553.0" promptText="Digite o número do processo" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" />
+      <Button fx:id="indexButton" layoutX="42.0" layoutY="412.0" mnemonicParsing="false" text="Indexar e prosseguir" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="448.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="cancelButton" layoutX="42.0" layoutY="455.0" mnemonicParsing="false" onAction="#onCancelButtonAction" text="Cancelar" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="448.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

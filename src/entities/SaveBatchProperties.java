@@ -27,7 +27,7 @@ public class SaveBatchProperties {
 
 				source = prop.getProperty("source");
 			}else {
-				setSource("source","C:\\Temp");
+				setSource("source","C:\\Temp\\lote");
 			}
 
 		} catch (IOException io) {

@@ -9,11 +9,18 @@ public class DocumentX {
 
 	private File FileDocument = null;
 	private Image imageFX = null;
-	private String documentType = null;
 	private StackPane stackImage = null;
 	
+	private Integer rAOwner = null;
+	private String nameOwner = null;
+	private Integer cPFOwner = null;
+	private Character level = null;
+	private String category = null;
+	private String documentType = null;
+	private String course = null;
+	private Integer processNumber = null;
+	
 	public DocumentX(File fileDocument, Image imageFX) {
-		super();
 		FileDocument = fileDocument;
 		this.imageFX = imageFX;
 	}
@@ -43,6 +50,62 @@ public class DocumentX {
 
 	public void setStackImage(StackPane stackImage) {
 		this.stackImage = stackImage;
+	}
+
+	public Integer getrAOwner() {
+		return rAOwner;
+	}
+
+	public void setrAOwner(Integer rAOwner) {
+		this.rAOwner = rAOwner;
+	}
+
+	public String getNameOwner() {
+		return nameOwner;
+	}
+
+	public void setNameOwner(String nameOwner) {
+		this.nameOwner = nameOwner;
+	}
+
+	public Integer getcPFOwner() {
+		return cPFOwner;
+	}
+
+	public void setcPFOwner(Integer cPFOwner) {
+		this.cPFOwner = cPFOwner;
+	}
+
+	public Character getLevel() {
+		return level;
+	}
+
+	public void setLevel(Character level) {
+		this.level = level;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getCourse() {
+		return course;
+	}
+
+	public void setCourse(String course) {
+		this.course = course;
+	}
+
+	public Integer getProcessNumber() {
+		return processNumber;
+	}
+
+	public void setProcessNumber(Integer processNumber) {
+		this.processNumber = processNumber;
 	}
 	
 	

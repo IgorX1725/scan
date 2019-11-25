@@ -1,4 +1,4 @@
-package gui;
+package gui.about;
 
 import java.io.IOException;
 
@@ -20,12 +20,12 @@ public class AboutController {
 	
 	public static void showWindow() {
 		try {
-			loader = new FXMLLoader((AboutController.class.getResource("/gui/About.fxml")));
+			loader = new FXMLLoader((AboutController.class.getResource("/gui/about/About.fxml")));
 			anchorPaneAbout = loader.load();
 			aboutScene = new Scene(anchorPaneAbout);
 			aboutStage = new Stage();
 			aboutStage.setScene(aboutScene);
-			AddIconOnScene.add(aboutStage, new Image("\\icons\\X_icon.png"));
+			AddIconOnScene.add(aboutStage, new Image("/icons/X_icon.png"));
 			aboutStage.setResizable(false);
 			aboutStage.setTitle("Sobre");
 			aboutStage.show();

@@ -1,6 +1,6 @@
 package utils;
 
-import gui.EditFilesController;
+import gui.editFiles.EditFilesController;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;

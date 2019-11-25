@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="354.0" prefHeight="354.0" prefWidth="821.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ViewController">
+<AnchorPane minHeight="354.0" prefHeight="354.0" prefWidth="821.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.main.MainController">
    <children>
       <Button fx:id="buttonScan" layoutX="372.0" layoutY="206.0" mnemonicParsing="false" onAction="#onButtonScanAction" prefHeight="57.0" prefWidth="82.0" text="Digitalizar">
          <font>

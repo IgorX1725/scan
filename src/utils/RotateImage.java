@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
+import gui.editFiles.LeftController;
 import javafx.scene.layout.StackPane;
 
 //Classe responsável por rotacionar as imagens do lote em 90 graus para a direta ou para a esquerda
@@ -55,6 +56,6 @@ public class RotateImage {
 		} else {
 			image.setRotate(image.getRotate() - 90);
 		}
-		ActionImageSelected.getPanelImage().update(image);
+		LeftController.update(image);
 	}
 }
