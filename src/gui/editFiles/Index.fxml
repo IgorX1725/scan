@@ -18,10 +18,10 @@
          </font>
       </Button>
       <Separator layoutX="6.0" layoutY="188.0" prefHeight="4.0" prefWidth="623.0" />
-      <ComboBox fx:id="comboBoxLevel" layoutX="42.0" layoutY="217.0" prefHeight="25.0" prefWidth="553.0" promptText="Selecione o Nível" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" />
-      <ComboBox fx:id="comboBoxCategory" layoutX="41.0" layoutY="294.0" prefHeight="25.0" prefWidth="553.0" promptText="Selecione a categoria do documento" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" />
+      <ComboBox fx:id="comboBoxLevel" layoutX="42.0" layoutY="217.0" onAction="#comboBoxLevelOnAction" prefHeight="25.0" prefWidth="553.0" promptText="Selecione o Nível" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" />
+      <ComboBox fx:id="comboBoxCategory" layoutX="41.0" layoutY="294.0" onAction="#comboBoxCategoryOnAction" prefHeight="25.0" prefWidth="553.0" promptText="Selecione a categoria do documento" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" />
       <ComboBox fx:id="comboBoxType" layoutX="42.0" layoutY="334.0" prefHeight="25.0" prefWidth="553.0" promptText="Selecione o tipo do documento" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" />
-      <ComboBox fx:id="comboBoxCourse" layoutX="42.0" layoutY="257.0" prefHeight="25.0" prefWidth="553.0" promptText="selecione o curso" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" />
+      <ComboBox fx:id="comboBoxCourse" layoutX="42.0" layoutY="257.0" onAction="#comboBoxCourseOnAction" prefHeight="25.0" prefWidth="553.0" promptText="selecione o curso" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" />
       <TextField fx:id="processNumberTextField" layoutX="42.0" layoutY="373.0" prefHeight="25.0" prefWidth="553.0" promptText="Digite o número do processo" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" />
       <Button fx:id="indexButton" layoutX="42.0" layoutY="412.0" mnemonicParsing="false" text="Indexar e prosseguir" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="448.0">
          <font>
