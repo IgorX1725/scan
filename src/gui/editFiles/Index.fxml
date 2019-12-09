@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,12 +19,14 @@
          </font>
       </Button>
       <Separator layoutX="6.0" layoutY="188.0" prefHeight="4.0" prefWidth="623.0" />
-      <ComboBox fx:id="comboBoxLevel" layoutX="42.0" layoutY="217.0" onAction="#comboBoxLevelOnAction" prefHeight="25.0" prefWidth="553.0" promptText="Selecione o Nível" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" />
-      <ComboBox fx:id="comboBoxCategory" layoutX="41.0" layoutY="294.0" onAction="#comboBoxCategoryOnAction" prefHeight="25.0" prefWidth="553.0" promptText="Selecione a categoria do documento" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" />
-      <ComboBox fx:id="comboBoxType" layoutX="42.0" layoutY="334.0" prefHeight="25.0" prefWidth="553.0" promptText="Selecione o tipo do documento" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" />
-      <ComboBox fx:id="comboBoxCourse" layoutX="42.0" layoutY="257.0" onAction="#comboBoxCourseOnAction" prefHeight="25.0" prefWidth="553.0" promptText="selecione o curso" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" />
+      <ComboBox fx:id="comboBoxLevel" layoutX="42.0" layoutY="217.0" onAction="#comboBoxLevelOnAction" prefHeight="25.0" prefWidth="553.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" />
+      <ComboBox fx:id="comboBoxCategory" layoutX="41.0" layoutY="320.0" onAction="#comboBoxCategoryOnAction" prefHeight="25.0" prefWidth="553.0" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="42.0" />
+      <ComboBox fx:id="comboBoxType" layoutX="41.0" layoutY="371.0" onAction="#comboBoxTypeOnAction" prefHeight="25.0" prefWidth="553.0" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="42.0" />
+      <ComboBox fx:id="comboBoxCourse" layoutX="42.0" layoutY="266.0" onAction="#comboBoxCourseOnAction" prefHeight="25.0" prefWidth="553.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" />
+     <!--  usuário não utiliza este campo
       <TextField fx:id="processNumberTextField" layoutX="42.0" layoutY="373.0" prefHeight="25.0" prefWidth="553.0" promptText="Digite o número do processo" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="41.0" />
-      <Button fx:id="indexButton" layoutX="42.0" layoutY="412.0" mnemonicParsing="false" text="Indexar e prosseguir" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="448.0">
+       -->
+      <Button fx:id="indexButton" layoutX="42.0" layoutY="412.0" mnemonicParsing="false" onAction="#indexButtonOnAction" text="Indexar e prosseguir" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="448.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -33,5 +36,10 @@
             <Font size="14.0" />
          </font>
       </Button>
+      <Label layoutX="42.0" layoutY="22.0" text="RA:" />
+      <Label layoutX="46.0" layoutY="200.0" prefHeight="17.0" prefWidth="30.0" text="Nível:" />
+      <Label layoutX="46.0" layoutY="251.0" prefHeight="17.0" prefWidth="61.0" text="Curso:" />
+      <Label layoutX="46.0" layoutY="300.0" text="Categoria:" />
+      <Label layoutX="46.0" layoutY="352.0" prefHeight="17.0" prefWidth="30.0" text="Tipo:" />
    </children>
 </AnchorPane>

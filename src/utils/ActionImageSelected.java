@@ -13,7 +13,7 @@ public class ActionImageSelected {
 		
 		if (ListDocumentsSelected.getInstance().size() > 0) {
 			ListDocumentsSelected.getInstance().forEach((n) -> n.getStackImage().setStyle("-fx-border-style: none"));
-			ListDocumentsSelected.getInstance().clear();
+			ListDocumentsSelected.clear();
 		}
 		ListDocumentsSelected.getInstance().add(image);
 		imageFX = image.getImageFX();

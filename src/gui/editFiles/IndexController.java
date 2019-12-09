@@ -7,6 +7,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import entities.DocumentX;
 import gui.util.Alerts;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -18,7 +19,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import utils.AddCheck;
 import utils.GetDatasJson;
+import utils.ListDocumentsSelected;
 
 public class IndexController {
 
@@ -31,13 +34,10 @@ public class IndexController {
 	private static ComboBox<String> comboBoxCourse = null;
 	private static ComboBox<String> comboBoxCategory = null;
 	private static ComboBox<String> comboBoxType = null;
-	private static TextField processNumberTextField = null;
+	// usuário não utiliza este campo
+	// private static TextField processNumberTextField = null;
 	private static Button indexButton = null;
 	private static JSONObject jsonResult = null;
-	private static List<String> listLevel = null;
-	private static List<String> listCourse = null;
-	private static List<String> listCategory = null;
-	private static List<String> listType = null;
 
 	@SuppressWarnings("unchecked")
 	public static AnchorPane getIndex() {
@@ -54,32 +54,40 @@ public class IndexController {
 					}
 				}
 			});
-
 			textFieldName = (TextField) anchorPane.lookup("#textFieldName");
-			textFieldName.setEditable(false);
 			textFieldCPF = (TextField) anchorPane.lookup("#textFieldCPF");
-			textFieldCPF.setEditable(false);
 			comboBoxLevel = (ComboBox<String>) anchorPane.lookup("#comboBoxLevel");
-			comboBoxLevel.setDisable(true);
-
 			comboBoxCourse = (ComboBox<String>) anchorPane.lookup("#comboBoxCourse");
-			comboBoxCourse.setDisable(true);
-
 			comboBoxCategory = (ComboBox<String>) anchorPane.lookup("#comboBoxCategory");
-			comboBoxCategory.setDisable(true);
-
 			comboBoxType = (ComboBox<String>) anchorPane.lookup("#comboBoxType");
-			comboBoxType.setDisable(true);
-			processNumberTextField = (TextField) anchorPane.lookup("#processNumberTextField");
-			processNumberTextField.setDisable(true);
 			indexButton = (Button) anchorPane.lookup("#indexButton");
-			indexButton.setDisable(true);
 
+			// usuário não utiliza este campo
+//			processNumberTextField = (TextField) anchorPane.lookup("#processNumberTextField");
+			setProprietsOnComponents();
+			LeftController.update(ListDocumentsSelected.next(false).getStackImage());
 			return anchorPane;
 		} catch (IOException e) {
 			Alerts.showAlert("Erro", "", "Não foi possível acessar esta opção:" + e.getMessage(), AlertType.ERROR);
 		}
 		return null;
+	}
+
+	private static void setProprietsOnComponents() {
+		comboBoxLevel.getSelectionModel().select(0);
+		if (textFieldRA.getText().isEmpty()) {
+			comboBoxLevel.setDisable(true);
+		}
+		comboBoxCourse.getSelectionModel().select(0);
+		comboBoxCourse.setDisable(true);
+		comboBoxCategory.getSelectionModel().select(0);
+		comboBoxCategory.setDisable(true);
+		comboBoxType.getSelectionModel().select(0);
+		comboBoxType.setDisable(true);
+		// usuário não utiliza este campo
+		// processNumberTextField.setDisable(true);
+
+		indexButton.setDisable(true);
 	}
 
 	public void onCancelButtonAction() {
@@ -97,47 +105,85 @@ public class IndexController {
 
 				textFieldName.setText(jsonResult.getString("name"));
 				textFieldCPF.setText(jsonResult.getString("CPF"));
-
-				listLevel = new ArrayList<String>();
 				comboBoxLevel.setDisable(false);
-				comboBoxLevel.getItems().addAll(addItems(listLevel, "level"));
+				comboBoxLevel.getItems().addAll(addItems("level"));
+				comboBoxCourse.getItems().addAll(addItems("course"));
+				comboBoxCategory.getItems().addAll(addItems("category"));
+				comboBoxType.getItems().addAll(addItems("type"));
 
 			}
 		}
 	}
 
 	public void comboBoxLevelOnAction() {
-		if (!comboBoxLevel.getSelectionModel().isEmpty()) {
+		if (!comboBoxLevel.getSelectionModel().getSelectedItem().isEmpty()) {
 			comboBoxCourse.setDisable(false);
-			listCourse = new ArrayList<String>();
-			comboBoxCourse.getItems().addAll(addItems(listCourse, "course"));
+
+		} else {
+			comboBoxCourse.setDisable(true);
 		}
 	}
 
 	public void comboBoxCourseOnAction() {
-		if (!comboBoxCourse.getSelectionModel().isEmpty()) {
+		if (!comboBoxCourse.getSelectionModel().getSelectedItem().isEmpty()) {
 			comboBoxCategory.setDisable(false);
-			listCategory = new ArrayList<String>();
-			comboBoxCategory.getItems().addAll(addItems(listCategory, "category"));
+		} else {
+			comboBoxCategory.setDisable(true);
 		}
 	}
 
 	public void comboBoxCategoryOnAction() {
-		if (!comboBoxCategory.getSelectionModel().isEmpty()) {
+		if (!comboBoxCategory.getSelectionModel().getSelectedItem().isEmpty()) {
 			comboBoxType.setDisable(false);
-			listType = new ArrayList<String>();
-			comboBoxType.getItems().addAll(addItems(listType, "type"));
+		} else {
+			comboBoxType.setDisable(true);
 		}
 	}
 
-	private static ObservableList<String> addItems(List<String> list, String field) {
-		JSONArray jsonArray = null;
-		jsonArray = new JSONArray(jsonResult.get(field).toString());
+	public void comboBoxTypeOnAction() {
+		if (!comboBoxType.getSelectionModel().getSelectedItem().isEmpty()) {
+			indexButton.setDisable(false);
+		}else {
+			indexButton.setDisable(true);
+		}
+	}
+
+	public void indexButtonOnAction() {
+		if (comboBoxType.getSelectionModel().getSelectedItem().isEmpty()
+				|| comboBoxLevel.getSelectionModel().getSelectedItem().isEmpty()
+				|| comboBoxCourse.getSelectionModel().getSelectedItem().isEmpty()
+				|| comboBoxCategory.getSelectionModel().getSelectedItem().isEmpty()) {
+			Alerts.showAlert("Alerta", "", "é necessário preencher todos os campos", AlertType.WARNING);
+		} else {
+			if(ListDocumentsSelected.next(false) == null) {
+				Alerts.showAlert("Alerta", "", "Todos os documentos selecionados foram indexados", AlertType.INFORMATION);
+				ListDocumentsSelected.clear();
+				EditFilesController.setRight(RightController.createPaneImages());
+			}else {
+			DocumentX document = ListDocumentsSelected.next(true);
+			document.setrAOwner(Integer.parseInt(textFieldRA.getText()));
+			document.setNameOwner(textFieldName.getText());
+			document.setcPFOwner(Long.parseLong(textFieldCPF.getText().replace(".", "").replace("-", "")));
+			document.setLevel(comboBoxLevel.getSelectionModel().getSelectedItem().toString());
+			document.setCourse(comboBoxCategory.getSelectionModel().getSelectedItem().toString());
+			document.setCategory(comboBoxCategory.getSelectionModel().getSelectedItem().toString());
+			document.setDocumentType(comboBoxType.getSelectionModel().getSelectedItem().toString());
+			document.setProcessNumber(0);
+			AddCheck.greenCheck(document.getStackImage());
+			setProprietsOnComponents();
+			LeftController.update(ListDocumentsSelected.next(false).getStackImage());
+			}
+		}
+	}
+
+	private static ObservableList<String> addItems(String field) {
+		List<String> list = new ArrayList<String>();
+		JSONArray jsonArray = new JSONArray(jsonResult.get(field).toString());
+		list.add("");
 		for (int i = 0; i < jsonArray.length(); i++) {
 			list.add(jsonArray.getString(i));
 		}
-
-		return FXCollections.observableArrayList(listLevel);
+		return FXCollections.observableArrayList(list);
 	}
 
 }

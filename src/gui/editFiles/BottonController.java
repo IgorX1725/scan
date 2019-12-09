@@ -49,7 +49,7 @@ public class BottonController {
 				e.printStackTrace();
 			}
 
-		ListDocumentsSelected.getInstance().clear();
+		ListDocumentsSelected.clear();
 		EditFilesController.setRight(RightController.createPaneImages());
 	}
 }

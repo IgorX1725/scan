@@ -13,8 +13,8 @@ public class DocumentX {
 	
 	private Integer rAOwner = null;
 	private String nameOwner = null;
-	private Integer cPFOwner = null;
-	private Character level = null;
+	private Long cPFOwner = null;
+	private String level = null;
 	private String category = null;
 	private String documentType = null;
 	private String course = null;
@@ -68,19 +68,19 @@ public class DocumentX {
 		this.nameOwner = nameOwner;
 	}
 
-	public Integer getcPFOwner() {
+	public Long getcPFOwner() {
 		return cPFOwner;
 	}
 
-	public void setcPFOwner(Integer cPFOwner) {
+	public void setcPFOwner(Long cPFOwner) {
 		this.cPFOwner = cPFOwner;
 	}
 
-	public Character getLevel() {
+	public String getLevel() {
 		return level;
 	}
 
-	public void setLevel(Character level) {
+	public void setLevel(String level) {
 		this.level = level;
 	}
 
