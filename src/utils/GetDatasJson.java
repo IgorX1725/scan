@@ -1,7 +1,8 @@
 package utils;
 
 import org.json.JSONObject;
-
+//classe responsável por gerar um JSON com os dados de um aluno fictício para fins de teste
+//esta classe será substituída por classe que irá se comunicar com a API para retornar os dados reais dos alunos
 public class GetDatasJson {
 	private static JSONObject jsonRA = new JSONObject();
 

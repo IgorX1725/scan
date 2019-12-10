@@ -25,8 +25,8 @@ import utils.ListDocumentsSelected;
 
 public class IndexController {
 
-	private static FXMLLoader loader;
-	private static AnchorPane anchorPane;
+	private static FXMLLoader loader = null;
+	private static AnchorPane anchorPane = null;
 	private static TextField textFieldRA = null;
 	private static TextField textFieldName = null;
 	private static TextField textFieldCPF = null;
@@ -39,12 +39,14 @@ public class IndexController {
 	private static Button indexButton = null;
 	private static JSONObject jsonResult = null;
 
+	//carrega e gera a view index.fxml na janela edit files
 	@SuppressWarnings("unchecked")
 	public static AnchorPane getIndex() {
 		try {
 			loader = new FXMLLoader(IndexController.class.getResource("/gui/editFiles/Index.fxml"));
 			anchorPane = loader.load();
 			textFieldRA = (TextField) anchorPane.lookup("#textFieldRA");
+			
 			// Permite que somente números sejam digitados no campo RA
 			textFieldRA.textProperty().addListener(new ChangeListener<String>() {
 				@Override
@@ -55,7 +57,9 @@ public class IndexController {
 				}
 			});
 			textFieldName = (TextField) anchorPane.lookup("#textFieldName");
+			textFieldName.setEditable(false);
 			textFieldCPF = (TextField) anchorPane.lookup("#textFieldCPF");
+			textFieldCPF.setEditable(false);
 			comboBoxLevel = (ComboBox<String>) anchorPane.lookup("#comboBoxLevel");
 			comboBoxCourse = (ComboBox<String>) anchorPane.lookup("#comboBoxCourse");
 			comboBoxCategory = (ComboBox<String>) anchorPane.lookup("#comboBoxCategory");
@@ -72,7 +76,7 @@ public class IndexController {
 		}
 		return null;
 	}
-
+//definir as propriedades dos componentes visuais da view index.fxml
 	private static void setProprietsOnComponents() {
 		comboBoxLevel.getSelectionModel().select(0);
 		if (textFieldRA.getText().isEmpty()) {
@@ -89,11 +93,11 @@ public class IndexController {
 
 		indexButton.setDisable(true);
 	}
-
+	//acão a ser executada quando o botão cancelar é clicado
 	public void onCancelButtonAction() {
 		EditFilesController.setRight(RightController.createPaneImages());
 	}
-
+	//ação a ser executada quando o botão consultar é clicado
 	public void onButtonConsultAction() {
 		if (textFieldRA.getText().trim().isEmpty()) {
 			Alerts.showAlert("Aviso", "", "é necessário informar o número do RA", AlertType.WARNING);
@@ -114,7 +118,7 @@ public class IndexController {
 			}
 		}
 	}
-
+	//ação a ser executada quando o comboBox do nível sofre alguma alteração
 	public void comboBoxLevelOnAction() {
 		if (!comboBoxLevel.getSelectionModel().getSelectedItem().isEmpty()) {
 			comboBoxCourse.setDisable(false);
@@ -123,7 +127,7 @@ public class IndexController {
 			comboBoxCourse.setDisable(true);
 		}
 	}
-
+	//ação a ser executada quando o comboBox do curso sofre alguma alteração
 	public void comboBoxCourseOnAction() {
 		if (!comboBoxCourse.getSelectionModel().getSelectedItem().isEmpty()) {
 			comboBoxCategory.setDisable(false);
@@ -131,7 +135,7 @@ public class IndexController {
 			comboBoxCategory.setDisable(true);
 		}
 	}
-
+	//ação a ser executada quando o comboBox da categoria sofre alguma alteração
 	public void comboBoxCategoryOnAction() {
 		if (!comboBoxCategory.getSelectionModel().getSelectedItem().isEmpty()) {
 			comboBoxType.setDisable(false);
@@ -139,7 +143,7 @@ public class IndexController {
 			comboBoxType.setDisable(true);
 		}
 	}
-
+	//ação a ser executada quando o comboBox do tipo do documento sofre alguma alteração
 	public void comboBoxTypeOnAction() {
 		if (!comboBoxType.getSelectionModel().getSelectedItem().isEmpty()) {
 			indexButton.setDisable(false);
@@ -147,7 +151,7 @@ public class IndexController {
 			indexButton.setDisable(true);
 		}
 	}
-
+	//ação a ser executada quando o botão indexar e prosseguir é clicado
 	public void indexButtonOnAction() {
 		if (comboBoxType.getSelectionModel().getSelectedItem().isEmpty()
 				|| comboBoxLevel.getSelectionModel().getSelectedItem().isEmpty()
@@ -155,27 +159,34 @@ public class IndexController {
 				|| comboBoxCategory.getSelectionModel().getSelectedItem().isEmpty()) {
 			Alerts.showAlert("Alerta", "", "é necessário preencher todos os campos", AlertType.WARNING);
 		} else {
-			if(ListDocumentsSelected.next(false) == null) {
+			setParamsOnDocuments(ListDocumentsSelected.next(false));
+			AddCheck.greenCheck(ListDocumentsSelected.next(false).getStackImage());
+			
+			if(ListDocumentsSelected.next(true) == null) {
+				
 				Alerts.showAlert("Alerta", "", "Todos os documentos selecionados foram indexados", AlertType.INFORMATION);
 				ListDocumentsSelected.clear();
+				loader = null;
+				anchorPane = null;
+				textFieldRA = null;
+				textFieldName = null;
+				textFieldCPF = null;
+				comboBoxLevel = null;
+				comboBoxCourse = null;
+				comboBoxCategory = null;
+				comboBoxType = null;
+				indexButton = null;
+				jsonResult = null;
 				EditFilesController.setRight(RightController.createPaneImages());
-			}else {
-			DocumentX document = ListDocumentsSelected.next(true);
-			document.setrAOwner(Integer.parseInt(textFieldRA.getText()));
-			document.setNameOwner(textFieldName.getText());
-			document.setcPFOwner(Long.parseLong(textFieldCPF.getText().replace(".", "").replace("-", "")));
-			document.setLevel(comboBoxLevel.getSelectionModel().getSelectedItem().toString());
-			document.setCourse(comboBoxCategory.getSelectionModel().getSelectedItem().toString());
-			document.setCategory(comboBoxCategory.getSelectionModel().getSelectedItem().toString());
-			document.setDocumentType(comboBoxType.getSelectionModel().getSelectedItem().toString());
-			document.setProcessNumber(0);
-			AddCheck.greenCheck(document.getStackImage());
-			setProprietsOnComponents();
+				
+			}else {				
 			LeftController.update(ListDocumentsSelected.next(false).getStackImage());
+			setProprietsOnComponents();
 			}
 		}
 	}
-
+	
+	//metodo responsável por adicionar os itens dos comboBoxs 
 	private static ObservableList<String> addItems(String field) {
 		List<String> list = new ArrayList<String>();
 		JSONArray jsonArray = new JSONArray(jsonResult.get(field).toString());
@@ -184,6 +195,20 @@ public class IndexController {
 			list.add(jsonArray.getString(i));
 		}
 		return FXCollections.observableArrayList(list);
+	}
+	
+	//metodo responsável por setar os parâmetros dos documentos que estão sendo indexados
+	private static void setParamsOnDocuments(DocumentX document) {
+		document.setrAOwner(Integer.parseInt(textFieldRA.getText()));
+		document.setNameOwner(textFieldName.getText());
+		document.setcPFOwner(Long.parseLong(textFieldCPF.getText().replace(".", "").replace("-", "")));
+		document.setLevel(comboBoxLevel.getSelectionModel().getSelectedItem().toString());
+		document.setCourse(comboBoxCourse.getSelectionModel().getSelectedItem().toString());
+		document.setCategory(comboBoxCategory.getSelectionModel().getSelectedItem().toString());
+		document.setDocumentType(comboBoxType.getSelectionModel().getSelectedItem().toString());
+		document.setProcessNumber(0);
+		//após teste, remover a linha abaixo
+		System.out.println(document.toString());
 	}
 
 }

@@ -4,13 +4,12 @@ import java.io.File;
 
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
-
+//classe responsável por criar instancias que representam os documentos dos alunos e seus metadados
 public class DocumentX {
 
 	private File FileDocument = null;
 	private Image imageFX = null;
 	private StackPane stackImage = null;
-	
 	private Integer rAOwner = null;
 	private String nameOwner = null;
 	private Long cPFOwner = null;
@@ -108,6 +107,10 @@ public class DocumentX {
 		this.processNumber = processNumber;
 	}
 	
-	
-	
+	@Override
+	public String toString() {
+		
+		return Integer.toString(getrAOwner()) + "\n" + getNameOwner() + "\n" +  Long.toString(getcPFOwner()) + "\n" + getLevel() + "\n" + getCategory() + "\n" + getDocumentType() + "\n"
+		+ getCourse() + "\n" + Integer.toString(getProcessNumber())+ "\n" + "\n";
+	}
 }
