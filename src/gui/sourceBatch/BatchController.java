@@ -1,6 +1,7 @@
 package gui.sourceBatch;
 
 
+import java.io.File;
 import java.io.IOException;
 
 import application.Main;
@@ -18,7 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import utils.AddIconOnScene;
-
+//classe responsável por alterar o diretório onde os lotes serão gravados
 public class BatchController {
 	
 	@FXML
@@ -33,7 +34,7 @@ public class BatchController {
 	private static Stage stage;
 	private static AnchorPane root;
 	private static FXMLLoader loader;
-	
+	// exibe a janela de seleção do diretório
 	public static void showWindow() {
 		try {
 			loader = new FXMLLoader(BatchController.class.getResource("SourceBatch.fxml"));
@@ -55,10 +56,18 @@ public class BatchController {
 		}
 		
 	}
-	
+	//ação que abre uma janela no explorer do sistema operacional para selecionar o diretório
+	// a função não permite que seja selecionado um diretório que contenha arquivos o pastas nele.
+	// caso altere o diretório e desejas voltar ao diretório anterior, é necessário mover os lotes do diretório para outro local,
+	//selecionar o diretório na janela de seleção, salvar e mover de volta os lotes para o diretório desejado. 
 	public void onSearchButtonAction() {
 		String source = WindowExplorerCreator.getSource(stage);
-		setTextInSourceTextField(source);
+		File fileSource = new File(source);
+		if(fileSource.list().length == 0) {
+			setTextInSourceTextField(source);
+		}else {
+			Alerts.showAlert("Alerta", "", "O diretório não está vazio. \n por favor, selecione um diretório vazio ou crie uma pasta",AlertType.WARNING);
+		}
 	}
 	
 	public void onSaveButtonAction() {
@@ -73,7 +82,7 @@ public class BatchController {
 	public TextField getSourceTextField() {
 		return sourceTextField;
 	}
-
+	// indica o diretório atual que está sendo salvo os lotes
 	public void setTextInSourceTextField(String source) {
 		if(sourceTextField == null) {
 			sourceTextField = new TextField(source);
