@@ -22,7 +22,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Arquivo">
             <items>
-              <MenuItem mnemonicParsing="false" text="Lotes" />
+              <MenuItem mnemonicParsing="false" onAction="#onMenuItemListBatch" text="Lotes" />
                   <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#onExitAction" text="Sair" />
             </items>
           </Menu>

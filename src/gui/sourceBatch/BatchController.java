@@ -7,6 +7,7 @@ import java.io.IOException;
 import application.Main;
 import entities.SaveBatchProperties;
 import entities.WindowExplorerCreator;
+import gui.main.MainController;
 import gui.util.Alerts;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -72,6 +73,7 @@ public class BatchController {
 	
 	public void onSaveButtonAction() {
 		SaveBatchProperties.setSource("source",sourceTextField.getText());
+		MainController.setRootBatches(new File(SaveBatchProperties.getSource()));
 		stage.close();
 	}
 	

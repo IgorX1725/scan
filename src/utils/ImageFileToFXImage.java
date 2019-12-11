@@ -10,7 +10,6 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import entities.DocumentX;
-import gui.main.MainController;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
@@ -63,9 +62,8 @@ public class ImageFileToFXImage {
 	}
 
 // Método que retorna os arquivos que estão no lote e ainda não foram adicionados na lista de imagens
-	public static File[] getNewFiles() {
+	public static File[] getNewFiles(File[] batch) {
 
-		File[] batch = MainController.getBatch().listFiles();
 		List<File> newImages = new ArrayList<>();
 
 		for (File image : batch) {

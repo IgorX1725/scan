@@ -17,6 +17,7 @@ import entities.enums.Profiles;
 import entities.exceptions.DomainExceptions;
 import gui.about.AboutController;
 import gui.editFiles.EditFilesController;
+import gui.listBatch.ListBatchController;
 import gui.sourceBatch.BatchController;
 import gui.util.Alerts;
 import javafx.fxml.FXML;
@@ -48,34 +49,37 @@ public class MainController {
 	private Stage stage = null;
 	private FileInputStream fileInputStream = null;
 	private FileOutputStream fileOutputStream = null;
-	private static String source = SaveBatchProperties.getSource();
-	private static Batch batch = new Batch(source);
+	private static File rootBatches = Batch.getFileRootBatch(SaveBatchProperties.getSource());
+	private static File batch = null;
 	private String profile = null;
-	
 
 // Metodo responsável por recuperar o ultimo lote manipulado pelo usuário
 	public void retrieveBatch() {
-		if (batch.getLastModified().listFiles().length > 0) {
-			Optional<ButtonType> result = null;
-			result = Alerts.showAlert("Continuar lote...", "", "Deseja continuar o ultmo lote?",
-					Alert.AlertType.CONFIRMATION);
-			if (result.get() == ButtonType.YES) {
-				EditFilesController.showDisplayEditWindow(batch.listFiles());
-			} else if (result.get().equals(ButtonType.CANCEL)) {
+		if(rootBatches.listFiles().length != 0) {
+			if (Batch.getLastModified(rootBatches).listFiles().length != 0) {
+				Optional<ButtonType> result = null;
+				result = Alerts.showAlert("Continuar lote...", "", "Deseja continuar o ultmo lote?",
+						Alert.AlertType.CONFIRMATION);
+				if (result.get() == ButtonType.YES) {
+					EditFilesController.showDisplayEditWindow(Batch.getLastModified(rootBatches).listFiles());
+				} else if (result.get().equals(ButtonType.CANCEL)) {
+				}
+			} else {
+				Batch.getLastModified(rootBatches).delete();
+				retrieveBatch();
 			}
-		} else {
-			batch.getLastModified().delete();
 		}
+
 	}
 
 // metodo que é responsável por disparar a ação do botão de digitaliação
 	public void onButtonScanAction() {
-		batch.createPath();
+		batch = Batch.createBatch(rootBatches);
 		profile = checkBoxFrontAndBack.isSelected() ? Profiles.FRENTEVERSO.toString().toLowerCase()
 				: Profiles.FRENTE.toString().toLowerCase();
 		try {
-			ScanDocument.scanningDocument("cmd /c naps2.console -o " + batch.getSource()
-					+ "\"\\$(n).tiff\" --split --progress -p " + profile);
+			ScanDocument.scanningDocument(
+					"cmd /c naps2.console -o " + batch.getPath() + "\"\\$(n).tiff\" --split --progress -p " + profile);
 			EditFilesController.showDisplayEditWindow(batch.listFiles());
 		} catch (IOException e) {
 			Alerts.showAlert("Erro", "", "Ocorreu um erro ao criar o lote:" + e.getMessage(), AlertType.ERROR);
@@ -86,7 +90,7 @@ public class MainController {
 
 //	metodo que é responsável por disparar a ação do botão de importação de arquivos
 	public void onButtonImportAction() {
-		batch.createPath();
+		batch = Batch.createBatch(rootBatches);
 		FileChannel sourceChannel = null;
 		FileChannel destinationChannel = null;
 		List<File> files;
@@ -97,7 +101,7 @@ public class MainController {
 				try {
 					fileInputStream = new FileInputStream(file.getAbsolutePath());
 					sourceChannel = fileInputStream.getChannel();
-					fileOutputStream = new FileOutputStream(batch.getSource() + "\\" + file.getName());
+					fileOutputStream = new FileOutputStream(batch.getPath() + "\\" + file.getName());
 					destinationChannel = fileOutputStream.getChannel();
 					sourceChannel.transferTo(0, sourceChannel.size(), destinationChannel);
 					if (sourceChannel != null && sourceChannel.isOpen())
@@ -118,7 +122,7 @@ public class MainController {
 			}
 		} catch (NullPointerException e) {
 			Alerts.showAlert("Aviso", "", "Nenhum arquivo foi selecionado ", AlertType.WARNING);
-			batch.getLastModified().delete();
+			Batch.getLastModified(rootBatches).delete();
 		}
 	}
 
@@ -131,18 +135,30 @@ public class MainController {
 	public void onAboutAction() {
 		AboutController.showWindow();
 	}
-	
+
 	public void onMenuItemSourceAction() {
 		BatchController.showWindow();
 	}
 
-	public static Batch getBatch() {
+	public void onMenuItemListBatch() {
+		ListBatchController.showWindow();
+	}
+
+	public static File getBatch() {
 		return batch;
 	}
 
 	public void init(Stage stage) {
 		this.stage = stage;
 
+	}
+
+	public static File getRootBatches() {
+		return rootBatches;
+	}
+
+	public static void setRootBatches(File rootBatches) {
+		MainController.rootBatches = rootBatches;
 	}
 
 }

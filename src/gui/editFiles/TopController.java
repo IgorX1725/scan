@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.List;
 
-import entities.Batch;
-import entities.SaveBatchProperties;
 import entities.ScanDocument;
 import entities.WindowExplorerCreator;
 import entities.enums.Profiles;
@@ -32,9 +30,6 @@ public class TopController {
 	private CheckBox checkBoxFrontAndBackEditFiles = null;
 	@FXML
 	private Button index = null;
-
-	private static String source = SaveBatchProperties.getSource();
-	private static Batch batch = new Batch(source);
 	private FileInputStream fileInputStream = null;
 	private FileOutputStream fileOutputStream = null;
 	private String profile = null;
@@ -45,9 +40,9 @@ public class TopController {
 		profile = checkBoxFrontAndBackEditFiles.isSelected() ? Profiles.FRENTEVERSO.toString().toLowerCase()
 				: Profiles.FRENTE.toString().toLowerCase();
 		try {
-			ScanDocument.scanningDocument("cmd /c naps2.console -o " + batch.getSource()
+			ScanDocument.scanningDocument("cmd /c naps2.console -o " + EditFilesController.getBatch().getAbsolutePath()
 					+ "\"\\$(n).tiff\" --split --progress -p " + profile);
-			ImageFileToFXImage.tiffToImageList(ImageFileToFXImage.getNewFiles());
+			ImageFileToFXImage.tiffToImageList(ImageFileToFXImage.getNewFiles(EditFilesController.getBatch().listFiles()));
 			RightController.updateImages();
 		} catch (IOException e) {
 			Alerts.showAlert("Erro", "", "Ocorreu um erro ao criar o lote:" + e.getMessage(), AlertType.ERROR);
@@ -68,7 +63,7 @@ public class TopController {
 				try {
 					fileInputStream = new FileInputStream(file.getAbsolutePath());
 					sourceChannel = fileInputStream.getChannel();
-					fileOutputStream = new FileOutputStream(batch.getSource() + "\\" + file.getName());
+					fileOutputStream = new FileOutputStream(EditFilesController.getBatch().getAbsolutePath() + "\\" + file.getName());
 					destinationChannel = fileOutputStream.getChannel();
 					sourceChannel.transferTo(0, sourceChannel.size(), destinationChannel);
 					if (sourceChannel != null && sourceChannel.isOpen())
@@ -100,4 +95,5 @@ public class TopController {
 			EditFilesController.setRight(indexScroll);
 		}
 	}
+	
 }

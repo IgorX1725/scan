@@ -21,6 +21,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import utils.AddIconOnScene;
 import utils.ImageFileToFXImage;
+import utils.ListDocuments;
 
 // Controlador da GUI EditFiles.fxml
 public class EditFilesController {
@@ -41,15 +42,16 @@ public class EditFilesController {
 	private static ScrollPane right = null;
 	private static GridPane panes = null;
 	private static Button indexButton;
+	private static File batch;
 
 	// Metodo para exibir a janela de edição dos documentos do lote
 	public static void showDisplayEditWindow(File[] list) {
+		setBatch(list[0].getParentFile());
 		try {
 			topLoader = new FXMLLoader(EditFilesController.class.getResource("Top.fxml"));
 			bottonLoader = new FXMLLoader(EditFilesController.class.getResource("Botton.fxml"));
 			leftLoader = new FXMLLoader(EditFilesController.class.getResource("Left.fxml"));
-
-			if (stage == null) {
+				ListDocuments.getInstance().clear();
 				ImageFileToFXImage.tiffToImageList(list);
 				root = new VBox();
 				setTop(topLoader.load());
@@ -90,10 +92,6 @@ public class EditFilesController {
 				left.prefHeightProperty().bind(panes.heightProperty());
 				stage.setMinWidth(root.getWidth() / 2);
 				stage.setMinHeight(root.getHeight()/1.5);
-			} else {
-				ImageFileToFXImage.tiffToImageList(list);
-				stage.show();
-			}
 			scene.setOnKeyPressed(e -> pressedKeys.add(e.getCode()));
 			scene.setOnKeyReleased(e -> pressedKeys.remove(e.getCode()));
 		} catch (Exception e) {
@@ -161,6 +159,14 @@ public class EditFilesController {
 
 	public static void setBotton(ToolBar botton) {
 		EditFilesController.botton = botton;
+	}
+
+	public static File getBatch() {
+		return batch;
+	}
+
+	public static void setBatch(File batch) {
+		EditFilesController.batch = batch;
 	}
 	
 	
