@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="289.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.sourceBatch.BatchController">
+   <children>
+      <Button fx:id="searchButton" layoutX="475.0" layoutY="118.0" mnemonicParsing="false" onAction="#onSearchButtonAction" prefHeight="26.0" prefWidth="88.0" text="Procurar" />
+      <TextField fx:id="sourceTextField" layoutX="37.0" layoutY="120.0" prefHeight="25.0" prefWidth="407.0" />
+      <Button fx:id="saveButton" layoutX="391.0" layoutY="232.0" mnemonicParsing="false" onAction="#onSaveButtonAction" prefHeight="34.0" prefWidth="76.0" text="Salvar" />
+      <Button fx:id="cancelButton" layoutX="484.0" layoutY="232.0" mnemonicParsing="false" onAction="#onCancelButtonAction" prefHeight="34.0" prefWidth="76.0" text="Cancelar" />
+      <Label layoutX="37.0" layoutY="93.0" prefHeight="25.0" prefWidth="218.0" text="Selecione o caminho desejado">
+         <font>
+            <Font name="Comic Sans MS" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
