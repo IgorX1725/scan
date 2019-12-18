@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://www.naps2.com/doc-command-line.html -->
+<html lang="en" class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="NAPS2 helps you scan, edit, and save to PDF, TIFF, JPEG, or PNG using a simple and functional interface. NAPS2 is completely free and open source.">
+    <meta name="author" content="">
+
+    <title>Command Line Usage - Support - NAPS2</title>
+    <link rel="shortcut icon" type="image/x-icon" href="https://www.naps2.com/images/scanner.ico">
+
+    <link href="./Command Line Usage - Support - NAPS2 - Documentation_files/site.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<link type="text/css" rel="stylesheet" charset="UTF-8" href="./Command Line Usage - Support - NAPS2 - Documentation_files/translateelement.css"></head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="https://www.naps2.com/">NAPS2</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://www.naps2.com/download.html">Download</a>
+                    </li>
+                    <li>
+                        <a href="https://www.naps2.com/support.html">Support</a>
+                    </li>
+                    <li>
+                        <a href="https://www.naps2.com/contribute.html">Contribute</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+<div class="intro-header simple">
+    <h1>Command Line Usage</h1>
+</div>
+
+<div class="doc">
+    <div class="toc well" data-title=".intro-header"><span class="toc-title">Table of Contents</span><ul><li style="margin-left: 0px;"><a href="https://www.naps2.com/doc-command-line.html#overview">Overview</a></li><li style="margin-left: 0px;"><a href="https://www.naps2.com/doc-command-line.html#usage">Usage</a></li><li style="margin-left: 30px;"><a href="https://www.naps2.com/doc-command-line.html#required-options">Required Options</a></li><li style="margin-left: 30px;"><a href="https://www.naps2.com/doc-command-line.html#import-options">Import Options</a></li><li style="margin-left: 60px;"><a href="https://www.naps2.com/doc-command-line.html#combining-and-converting-files">Combining and Converting Files</a></li><li style="margin-left: 60px;"><a href="https://www.naps2.com/doc-command-line.html#slicing-imported-files">Slicing Imported Files</a></li><li style="margin-left: 30px;"><a href="https://www.naps2.com/doc-command-line.html#pdf-options">PDF Options</a></li><li style="margin-left: 30px;"><a href="https://www.naps2.com/doc-command-line.html#image-options">Image Options</a></li><li style="margin-left: 30px;"><a href="https://www.naps2.com/doc-command-line.html#email-options">Email Options</a></li><li style="margin-left: 30px;"><a href="https://www.naps2.com/doc-command-line.html#ocr-options">OCR Options</a></li><li style="margin-left: 30px;"><a href="https://www.naps2.com/doc-command-line.html#order-options">Order Options</a></li><li style="margin-left: 30px;"><a href="https://www.naps2.com/doc-command-line.html#split-options">Split Options</a></li><li style="margin-left: 30px;"><a href="https://www.naps2.com/doc-command-line.html#other-options">Other Options</a></li><li style="margin-left: 30px;"><a href="https://www.naps2.com/doc-command-line.html#placeholders">Placeholders</a></li></ul></div>
+    <a class="back-link" href="https://www.naps2.com/support.html">Back to Support</a>
+    <h1 id="overview">Overview</h1>
+    <p>NAPS2, in addition to the primary GUI, also offers a command-line interface (CLI) via the NAPS2.Console.exe program. This allows scanning and saving documents to be automated and/or scripted.</p>
+    <h1 id="usage">Usage</h1>
+    <p>NAPS2.Console uses standard unix-style options. Each option has a long form (e.g. "--output"), and some have a short form (e.g. "-o"). Some options are flags, and some are expected to be provided a value.</p>
+    <h2 id="required-options">Required Options</h2>
+    <p>At least one of these options must be specified.</p>
+    <p>
+        <strong>-o, --output {path}</strong><br>
+        Specifies the path, name, and extension of the output file to save. The extension determines the output type (e.g. ".pdf" for a PDF file, ".jpg" for a JPEG image, etc.).
+    </p>
+    <p>
+        </p><pre>naps2.console -o "F:\scanned receipt.pdf"</pre>
+    <p></p>
+    <p>
+        <strong>-e, --email {filename}</strong><br>
+        Specifies that an email should be sent with the scan attached with the given file name and extension. The extension determines the attachment type (e.g. ".pdf" for a PDF file, ".jpg" for a JPEG image, etc.).
+    </p>
+    <p>
+        </p><pre>naps2.console -e "scan.pdf"</pre>
+    <p></p>
+    <p>
+        <strong>-a, --autosave</strong><br>
+        Specifies that the Auto Save settings from the selected profile should be used. The profile must have Auto Save enabled.
+    </p>
+    <p>
+        </p><pre>naps2.console -a</pre>
+    <p></p>
+    <h2 id="import-options">Import Options</h2>
+    <p>
+        <strong>-i, --import {filenames}</strong><br>
+        Specifies the name and path of one or more pdf/image files to import. Imported files are prepended to the output in the order they are specified. Multiple files are separated by a semicolon (";").
+    </p>
+    <p>
+        </p><pre>naps2.console -i "F:\incomplete scan.pdf" -o "F:\complete scan.pdf"</pre>
+    <p></p>
+    <p>
+        <strong>--importpassword {password}</strong><br>
+        Specifies the password to be used to import any encrypted PDFs.
+    </p>
+    <p>
+        </p><pre>naps2.console -i "F:\encrypted.pdf" --importpassword "123456" -o "F:\complete scan.pdf"</pre>
+    <p></p>
+    <h3 id="combining-and-converting-files">Combining and Converting Files</h3>
+    <p>The -i/--import option can be used in combination with the option "-n 0" to combine multiple files together or to change the type of a file without doing any scanning.</p>
+    <p>
+        To combine multiple images into a PDF:<br>
+        </p><pre>naps2.console -i "F:\a.jpg;F:\b.jpg;F:\c.jpg" -n 0 -o "F:\abc.pdf"</pre>
+    <p></p>
+    <p>
+        To combine multiple PDFs together:<br>
+        </p><pre>naps2.console -i "F:\a.pdf;F:\b.pdf;F:\c.pdf" -n 0 -o "F:\abc.pdf"</pre>
+    <p></p>
+    <p>
+        To convert a TIFF into a PDF:<br>
+        </p><pre>naps2.console -i "F:\a.tiff" -n 0 -o "F:\a.pdf"</pre>
+    <p></p>
+    <p>
+        To convert between image types:<br>
+        </p><pre>naps2.console -i "F:\a.png" -n 0 -o "F:\a.jpg"</pre>
+    <p></p>
+    <h3 id="slicing-imported-files">Slicing Imported Files</h3>
+    <p>
+        To only import part of a PDF or TIFF file, you can use <a href="https://stackoverflow.com/questions/509211/understanding-pythons-slice-notation/509295#509295">slice notation</a>.
+        Note: With this notation, page numbers start at 0!
+    </p>
+    <p>
+        To get the first page:<br>
+        </p><pre>naps2.console -i "F:\abcd.pdf[0]" -n 0 -o "F:\a.pdf"</pre>
+        To replace the third page:<br>
+        <pre>naps2.console -i "F:\abcde.pdf[:2];F:\r.pdf;F:\abcde.pdf[3:]" -n 0 -o "F:\abrde.pdf"</pre>
+    <p></p>
+    <p>
+        </p><table>
+            <tbody><tr><td>First page:&nbsp;</td><td><code>[0]</code></td></tr>
+            <tr><td>Second page:&nbsp;</td><td><code>[1]</code></td></tr>
+            <tr><td>Third page:&nbsp;</td><td><code>[2]</code></td></tr>
+            <tr><td>Last page:&nbsp;</td><td><code>[-1]</code></td></tr>
+            <tr><td>Second-last page:&nbsp;</td><td><code>[-2]</code></td></tr>
+            <tr><td>First two pages:&nbsp;</td><td><code>[:2]</code></td></tr>
+            <tr><td>Skip the first two pages:&nbsp;</td><td><code>[2:]</code></td></tr>
+            <tr><td>Last two pages:&nbsp;</td><td><code>[-2:]</code></td></tr>
+            <tr><td>Skip the last two pages:&nbsp;</td><td><code>[:-2]</code></td></tr>
+            <tr><td>Skip the first/last two pages:&nbsp;</td><td><code>[2:-2]</code></td></tr>
+        </tbody></table>
+    <p></p>
+    <h2 id="pdf-options">PDF Options</h2>
+    <p>These options are only applicable if the output file is a PDF.</p>
+    <p>
+        <strong>--pdftitle {title}</strong><br>
+        Specifies the title for generated PDF metadata.
+    </p>
+    <p>
+        <strong>--pdfauthor {author}</strong><br>
+        Specifies the author for generated PDF metadata.
+    </p>
+    <p>
+        <strong>--pdfsubject {subject}</strong><br>
+        Specifies the subject for generated PDF metadata.
+    </p>
+    <p>
+        <strong>--pdfkeywords {keywords}</strong><br>
+        Specifies the keywords for generated PDF metadata.
+    </p>
+    <p>
+        </p><pre>naps2.console -o "F:\scan.pdf" --pdftitle "January Receipts" --pdfauthor "John Smith" --pdfsubject "Receipts" --pdfkeywords "January, Receipts"</pre>
+    <p></p>
+    <p>
+        <strong>--usesavedmetadata</strong><br>
+        Specifies that the metadata configured in the GUI should be used for generated PDF.
+    </p>
+    <p>
+        </p><pre>naps2.console -o "F:\scan.pdf" --usesavedmetadata</pre>
+    <p></p>
+    <p>
+        <strong>--encryptconfig {path}</strong><br>
+        Specifies the name and path of an XML file to configure encryption for the generated PDF.<br>
+    </p>
+    <p>
+        </p><pre>naps2.console -o "F:\encrypted.pdf" --encryptconfig "F:\pdfencryption.xml"</pre>
+        pdfencryption.xml:
+        <pre>&lt;?xml version="1.0"?&gt;
+&lt;PdfEncryption xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;EncryptPdf&gt;true&lt;/EncryptPdf&gt;
+  &lt;UserPassword&gt;123&lt;/UserPassword&gt;
+  &lt;OwnerPassword&gt;456&lt;/OwnerPassword&gt;
+  &lt;AllowContentCopyingForAccessibility&gt;false&lt;/AllowContentCopyingForAccessibility&gt;
+  &lt;AllowAnnotations&gt;false&lt;/AllowAnnotations&gt;
+  &lt;AllowDocumentAssembly&gt;false&lt;/AllowDocumentAssembly&gt;
+  &lt;AllowContentCopying&gt;false&lt;/AllowContentCopying&gt;
+  &lt;AllowFormFilling&gt;false&lt;/AllowFormFilling&gt;
+  &lt;AllowFullQualityPrinting&gt;false&lt;/AllowFullQualityPrinting&gt;
+  &lt;AllowDocumentModification&gt;false&lt;/AllowDocumentModification&gt;
+  &lt;AllowPrinting&gt;false&lt;/AllowPrinting&gt;
+&lt;/PdfEncryption&gt;</pre>
+    <p></p>
+    <p>
+        <strong>--usesavedencryptconfig</strong><br>
+        Specifies that the encryption configured in the GUI should be used for the generated PDF.
+    </p>
+    <p>
+        </p><pre>naps2.console -o "F:\encrypted.pdf" --usesavedencryptconfig</pre>
+    <p></p>
+    <p>
+        <strong>--pdfcompat {type}</strong><br>
+        Specifies the standard used for the generated PDF ("default", "A1-b", "A2-b", "A3-b", or "A3-u").
+    </p>
+    <p>
+        </p><pre>naps2.console -o "F:\pdfa.pdf" --pdfcompat A1-b</pre>
+    <p></p>
+    <h2 id="image-options">Image Options</h2>
+    <p>
+        <strong>--jpegquality {#}</strong><br>
+        (Default: 75) Specifies the quality of saved JPEG files (0-100).
+    </p>
+    <p>
+        </p><pre>naps2.console -o "F:\scan.jpg" --jpegquality 90</pre>
+    <p></p>
+    <p>
+        <strong>--tiffcomp {type}</strong><br>
+        Specifies the type of compression used for TIFF files ("auto", "lzw", "ccitt4", or "none").
+    </p>
+    <p>
+        </p><pre>naps2.console -o "F:\scan.tiff" --tiffcomp none</pre>
+    <p></p>
+    <h2 id="email-options">Email Options</h2>
+    <p>These options are only applicable if -e/--email is specified.</p>
+    <p>
+        <strong>--to {address}</strong><br>
+        Specifies one or more addresses (comma-separated) of the email recipients.
+    </p>
+    <p>
+        <strong>--cc {address}</strong><br>
+        Specifies one or more addresses (comma-separated) of the email recipients.
+    </p>
+    <p>
+        <strong>--bcc {address}</strong><br>
+        Specifies one or more addresses (comma-separated) of the email recipients.
+    </p>
+    <p>
+        <strong>--subject {subject}</strong><br>
+        Specifies the subject of the email message.
+    </p>
+    <p>
+        <strong>--body {text}</strong><br>
+        Specifies the body text of the email message.
+    </p>
+    <p>
+        <strong>--autosend</strong><br>
+        Specifies that the email should be sent without prompting the user to edit it first. Note that Outlook may not allow the email to be sent without user approval.
+    </p>
+    <p>
+        <strong>--silentsend</strong><br>
+        Requires --autosend. Specifies that the user should not be prompted to authenticate. This may result in an error if authentication is required. Note that Outlook may not allow the email to be sent without user approval.
+    </p>
+    <p>
+        </p><pre>naps2.console -e "scan.pdf" --to "jsmith@example.com" --subject "Scanned Document" --body "Here it is." --autosend --silentsend</pre>
+    <p></p>
+    <h2 id="ocr-options">OCR Options</h2>
+    <p>If OCR options aren't specified, the options from the GUI are used.</p>
+    <p>
+        <strong>--ocrlang {code}</strong><br>
+        Specifies the three-letter code for the language used for OCR (e.g. 'eng' for English, 'fra' for French, etc.). Multiple codes can be separated by the '+' symbol. Implies --enableocr. Reference: <a href="http://www.loc.gov/standards/iso639-2/php/code_list.php" rel="nofollow">http://www.loc.gov/standards/iso639-2/php/code_list.php</a>
+    </p>
+    <p>
+        </p><pre>naps2.console -o "F:\scan.pdf" --ocrlang "eng"</pre>
+    <p></p>
+    <p>
+        <strong>--enableocr</strong><br>
+        Specifies that OCR should be used when generating PDFs.
+    </p>
+    <p>
+        </p><pre>naps2.console -o "F:\scan.pdf" --enableocr</pre>
+    <p></p>
+    <p>
+        <strong>--disableocr</strong><br>
+        Specifies that OCR should NOT be used when generating PDFs. Overrides --enableocr.
+    </p>
+    <p>
+        </p><pre>naps2.console -o "F:\scan.pdf" --disableocr</pre>
+    <p></p>
+    <h2 id="order-options">Order Options</h2>
+    <p>
+        <strong>--interleave</strong><br>
+        Specifies that pages should be interleaved. For example, if you scan pages in the order "1, 3, 5, 2, 4, 6", using this option will result in the order "1, 2, 3, 4, 5, 6".
+    </p>
+    <p>
+        <strong>--altinterleave</strong><br>
+        Specifies that pages should be interleaved in an alternative way. For example, if you scan pages in the order "1, 3, 5, 6, 4, 2", using this option will result in the order "1, 2, 3, 4, 5, 6".
+    </p>
+    <p>
+        <strong>--deinterleave</strong><br>
+        Specifies that pages should be deinterleaved. For example, if you have pages in the order "1, 4, 2, 5, 3, 6", using this option will result in the order "1, 2, 3, 4, 5, 6".
+    </p>
+    <p>
+        <strong>--altdeinterleave</strong><br>
+        Specifies that pages should be deinterleaved in an alternative way. For example, if you have pages in the order "1, 6, 2, 5, 3, 4", using this option will result in the order "1, 2, 3, 4, 5, 6".
+    </p>
+    <p>
+        <strong>--reverse</strong><br>
+        Specifies that pages should be reversed. For example, if you scan pages in the order "6, 5, 4, 3, 2, 1", using this option will result in the order "1, 2, 3, 4, 5, 6".
+    </p>
+    <h2 id="split-options">Split Options</h2>
+    <p>These options are mutually exclusive.</p>
+    <p>
+        <strong>--split</strong><br>
+        Specifies that each page should be saved to its own PDF or TIFF file.
+    </p>
+    <p>
+        <strong>--splitscans</strong><br>
+        Specifies that the pages from each scan should be saved to their own file. This only makes sense with the -n option.
+    </p>
+    <p>
+        <strong>--splitpatcht</strong><br>
+        Specifies that pages should be saved to multiple files, separated by <a href="https://www.naps2.com/doc-batch-scan.html#patch-t">Patch-T</a> pages.
+    </p>
+    <p>
+        <strong>--splitsize {#}</strong><br>
+        Specifies that pages should be saved to multiple files, with the given number of pages per file.
+    </p>
+    <h2 id="other-options">Other Options</h2>
+    <p>
+        <strong>-p, --profile {name}</strong><br>
+        Specifies the name of the profile to use when scanning. Profiles are defined using the GUI. If this option is not specified, the most-recently-used profile from the GUI is selected.
+    </p>
+    <p>
+        </p><pre>naps2.console -o "F:\scanned receipt.pdf" -p "Canon MP495 (color)"</pre>
+    <p></p>
+    <p>
+        <strong>-v, --verbose</strong><br>
+        Displays progress information. If not specified, no output will be displayed upon success.
+    </p>
+    <p>
+        </p><pre>naps2.console -o "F:\scanned receipt.pdf" -v</pre>
+    <p></p>
+    <p>
+        <strong>--progress</strong><br>
+        Displays a graphical window for scanning progress.
+    </p>
+    <p>
+        </p><pre>naps2.console -o "F:\scanned receipt.pdf" --progress</pre>
+    <p></p>
+    <p>
+        <strong>-n, --number {#}</strong><br>
+        (Default: 1) The number of scans to perform. This may be different from the number of pages scanned (e.g. if you have an automated document feeder).
+    </p>
+    <p>
+        </p><pre>naps2.console -o "F:\scanned receipts.pdf" -n 5</pre>
+    <p></p>
+    <p>
+        <strong>-d, --delay {#}</strong><br>
+        (Default: 0) The delay (in milliseconds) between each scan.
+    </p>
+    <p>
+        </p><pre>naps2.console -o "F:\scanned receipts.pdf" -n 5 -d 5000</pre>
+    <p></p>
+    <p>
+        <strong>-f, --force</strong><br>
+        Overwrite existing files. If not specified, any files that already exist will not be changed (and an error message will be displayed).
+    </p>
+    <p>
+        </p><pre>naps2.console -o "F:\scanned receipt.pdf" -f</pre>
+    <p></p>
+    <p>
+        <strong>-w, --wait</strong><br>
+        After finishing, wait for user input (enter/return) before exiting.
+    </p>
+    <p>
+        </p><pre>naps2.console -o "F:\scanned receipt.pdf" -w</pre>
+    <p></p>
+    <p>
+        <strong>--install {component}</strong><br>
+        Installs the specified component. Possible values: "genericimport", "ocr-eng" (and other language codes - see <a href="http://www.loc.gov/standards/iso639-2/php/code_list.php" rel="nofollow">reference</a>)
+    </p>
+    <p>
+        <strong>--help</strong><br>
+        Display a help screen similar to this wiki page.
+    </p>
+    <p>
+        </p><pre>naps2.console --help</pre>
+    <p></p>
+    <h2 id="placeholders">Placeholders</h2>
+    <p>
+        Any path arguments (-o, -e, etc.) as well as some text arguments (--subject, --body) can use placeholders. The following placeholders are available:
+    </p>
+    <p>
+        <code>$(YYYY)</code> - The current year.<br>
+        <code>$(YY)</code> - The current year (00-99).<br>
+        <code>$(MM)</code> - The current month (01-12).<br>
+        <code>$(DD)</code> - The current day (01-31).<br>
+        <code>$(hh)</code> - The current hour (00-23).<br>
+        <code>$(mm)</code> - The current minute (00-59).<br>
+        <code>$(ss)</code> - The current second (00-59).<br>
+        <code>$(nnnn)</code> - A unique incrementing number (0001, 0002, etc.).<br>
+        <code>$(nnn)</code> - A unique incrementing number (001, 002, etc.).<br>
+        <code>$(nn)</code> - A unique incrementing number (01, 02, etc.).<br>
+        <code>$(n)</code> - A unique incrementing number (1, 2, etc.).
+    </p>
+    <a class="back-link" href="https://www.naps2.com/support.html">Back to Support</a>
+</div>
+
+
+        <footer class="simple">
+            <div class="donation-request">
+                <p>NAPS2 is provided completely free of charge, with no ads or restrictions. Consider making a donation.</p>
+                <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=M77MFAP2ZV9RG">
+                    <img src="./Command Line Usage - Support - NAPS2 - Documentation_files/btn_donate_LG.gif">
+                </a>
+            </div>
+            <div class="copyright text-muted small pull-right">Copyright © Ben Olden-Cooligan 2019</div>
+        </footer>
+    
+
+    <script async="" src="./Command Line Usage - Support - NAPS2 - Documentation_files/analytics.js.download"></script><script src="./Command Line Usage - Support - NAPS2 - Documentation_files/site.js.download"></script>
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-65578873-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+
+
+<div id="lightboxOverlay" class="lightboxOverlay" style="display: none;"></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Command Line Usage - Support - NAPS2 - Documentation_files/translate_24dp.png" width="20" height="20" alt="Google Tradutor"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Texto original</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Sugerir uma tradução melhor</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div id="lightbox" class="lightbox" style="display: none;"><div class="lb-outerContainer"><div class="lb-container"><img class="lb-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="><div class="lb-nav"><a class="lb-prev" href="https://www.naps2.com/doc-command-line.html"></a><a class="lb-next" href="https://www.naps2.com/doc-command-line.html"></a></div><div class="lb-loader"><a class="lb-cancel"></a></div></div></div><div class="lb-dataContainer"><div class="lb-data"><div class="lb-details"><span class="lb-caption"></span><span class="lb-number"></span></div><div class="lb-closeContainer"><a class="lb-close"></a></div></div></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div></body></html>

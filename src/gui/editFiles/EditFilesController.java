@@ -45,14 +45,14 @@ public class EditFilesController {
 	private static File batch;
 
 	// Metodo para exibir a janela de edição dos documentos do lote
-	public static void showDisplayEditWindow(File[] list) {
-		setBatch(list[0].getParentFile());
+	public static void showDisplayEditWindow(File list) {
+		setBatch(list);
 		try {
 			topLoader = new FXMLLoader(EditFilesController.class.getResource("Top.fxml"));
 			bottonLoader = new FXMLLoader(EditFilesController.class.getResource("Botton.fxml"));
 			leftLoader = new FXMLLoader(EditFilesController.class.getResource("Left.fxml"));
 				ListDocuments.getInstance().clear();
-				ImageFileToFXImage.tiffToImageList(list);
+				ImageFileToFXImage.tiffToImageList(list.listFiles());
 				root = new VBox();
 				setTop(topLoader.load());
 				// EventListener para centralizar o bottão "indexar" quando o tamanho da janela

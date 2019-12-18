@@ -76,23 +76,7 @@ public class IndexController {
 		}
 		return null;
 	}
-//definir as propriedades dos componentes visuais da view index.fxml
-	private static void setProprietsOnComponents() {
-		comboBoxLevel.getSelectionModel().select(0);
-		if (textFieldRA.getText().isEmpty()) {
-			comboBoxLevel.setDisable(true);
-		}
-		comboBoxCourse.getSelectionModel().select(0);
-		comboBoxCourse.setDisable(true);
-		comboBoxCategory.getSelectionModel().select(0);
-		comboBoxCategory.setDisable(true);
-		comboBoxType.getSelectionModel().select(0);
-		comboBoxType.setDisable(true);
-		// usuário não utiliza este campo
-		// processNumberTextField.setDisable(true);
 
-		indexButton.setDisable(true);
-	}
 	//acão a ser executada quando o botão cancelar é clicado
 	public void onCancelButtonAction() {
 		EditFilesController.setRight(RightController.createPaneImages());
@@ -105,8 +89,7 @@ public class IndexController {
 			jsonResult = new JSONObject(GetDatasJson.getRA(Integer.parseInt(textFieldRA.getText())));
 			if (jsonResult.isEmpty()) {
 				Alerts.showAlert("Aviso", "", "RA não localizado. Favor, verificar", AlertType.WARNING);
-			} else {
-
+			} else {				
 				textFieldName.setText(jsonResult.getString("name"));
 				textFieldCPF.setText(jsonResult.getString("CPF"));
 				comboBoxLevel.setDisable(false);
@@ -210,5 +193,23 @@ public class IndexController {
 		//após teste, remover a linha abaixo
 		System.out.println(document.toString());
 	}
+	
+	//definir as propriedades dos componentes visuais da view index.fxml
+		private static void setProprietsOnComponents() {
+			comboBoxLevel.getSelectionModel().select(0);
+			if (textFieldRA.getText().isEmpty()) {
+				comboBoxLevel.setDisable(true);
+			}
+			comboBoxCourse.getSelectionModel().select(0);
+			comboBoxCourse.setDisable(true);
+			comboBoxCategory.getSelectionModel().select(0);
+			comboBoxCategory.setDisable(true);
+			comboBoxType.getSelectionModel().select(0);
+			comboBoxType.setDisable(true);
+			// usuário não utiliza este campo
+			// processNumberTextField.setDisable(true);
+
+			indexButton.setDisable(true);
+		}
 
 }

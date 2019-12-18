@@ -67,7 +67,7 @@ public class ListBatchController {
 		File batch = comboBoxBatch.getSelectionModel().getSelectedItem();
 		stage.close();
 		ListDocuments.getInstance().clear();
-		EditFilesController.showDisplayEditWindow(batch.listFiles());
+		EditFilesController.showDisplayEditWindow(batch);
 	}
 	
 	//insere os valores no comboBox

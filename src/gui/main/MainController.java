@@ -61,7 +61,7 @@ public class MainController {
 				result = Alerts.showAlert("Continuar lote...", "", "Deseja continuar o ultmo lote?",
 						Alert.AlertType.CONFIRMATION);
 				if (result.get() == ButtonType.YES) {
-					EditFilesController.showDisplayEditWindow(Batch.getLastModified(rootBatches).listFiles());
+					EditFilesController.showDisplayEditWindow(Batch.getLastModified(rootBatches));
 				} else if (result.get().equals(ButtonType.CANCEL)) {
 				}
 			} else {
@@ -80,7 +80,7 @@ public class MainController {
 		try {
 			ScanDocument.scanningDocument(
 					"cmd /c naps2.console -o " + batch.getPath() + "\"\\$(n).tiff\" --split --progress -p " + profile);
-			EditFilesController.showDisplayEditWindow(batch.listFiles());
+			EditFilesController.showDisplayEditWindow(batch);
 		} catch (IOException e) {
 			Alerts.showAlert("Erro", "", "Ocorreu um erro ao criar o lote:" + e.getMessage(), AlertType.ERROR);
 		} catch (DomainExceptions e) {
@@ -118,7 +118,7 @@ public class MainController {
 					e.printStackTrace();
 				}
 				ListDocuments.getInstance().clear();
-				EditFilesController.showDisplayEditWindow(batch.listFiles());
+				EditFilesController.showDisplayEditWindow(batch);
 			}
 		} catch (NullPointerException e) {
 			Alerts.showAlert("Aviso", "", "Nenhum arquivo foi selecionado ", AlertType.WARNING);

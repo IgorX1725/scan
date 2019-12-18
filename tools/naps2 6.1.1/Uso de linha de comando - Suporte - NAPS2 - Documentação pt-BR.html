@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://www.naps2.com/doc-command-line.html -->
+<html lang="pt" class="translated-ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="NAPS2 helps you scan, edit, and save to PDF, TIFF, JPEG, or PNG using a simple and functional interface. NAPS2 is completely free and open source.">
+    <meta name="author" content="">
+
+    <title>Uso de linha de comando - Suporte - NAPS2</title>
+    <link rel="shortcut icon" type="image/x-icon" href="https://www.naps2.com/images/scanner.ico">
+
+    <link href="./Uso de linha de comando - Suporte - NAPS2 - Documentação pt-BR_files/site.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<link type="text/css" rel="stylesheet" charset="UTF-8" href="./Uso de linha de comando - Suporte - NAPS2 - Documentação pt-BR_files/translateelement.css"></head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Alternar de navegação</font></font></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="https://www.naps2.com/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">NAPS2</font></font></a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="https://www.naps2.com/download.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Baixar</font></font></a>
+                    </li>
+                    <li>
+                        <a href="https://www.naps2.com/support.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Apoio, suporte</font></font></a>
+                    </li>
+                    <li>
+                        <a href="https://www.naps2.com/contribute.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Contribuir</font></font></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    
+<div class="intro-header simple">
+    <h1><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Uso de linha de comando</font></font></h1>
+</div>
+
+<div class="doc">
+    <div class="toc well" data-title=".intro-header"><span class="toc-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Índice</font></font></span><ul><li style="margin-left: 0px;"><a href="https://www.naps2.com/doc-command-line.html#overview"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">visão global</font></font></a></li><li style="margin-left: 0px;"><a href="https://www.naps2.com/doc-command-line.html#usage"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Uso</font></font></a></li><li style="margin-left: 30px;"><a href="https://www.naps2.com/doc-command-line.html#required-options"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opções Requeridas</font></font></a></li><li style="margin-left: 30px;"><a href="https://www.naps2.com/doc-command-line.html#import-options"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opções de Importação</font></font></a></li><li style="margin-left: 60px;"><a href="https://www.naps2.com/doc-command-line.html#combining-and-converting-files"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Combinando e convertendo arquivos</font></font></a></li><li style="margin-left: 60px;"><a href="https://www.naps2.com/doc-command-line.html#slicing-imported-files"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cortando arquivos importados</font></font></a></li><li style="margin-left: 30px;"><a href="https://www.naps2.com/doc-command-line.html#pdf-options"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opções de PDF</font></font></a></li><li style="margin-left: 30px;"><a href="https://www.naps2.com/doc-command-line.html#image-options"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opções de imagem</font></font></a></li><li style="margin-left: 30px;"><a href="https://www.naps2.com/doc-command-line.html#email-options"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opções de email</font></font></a></li><li style="margin-left: 30px;"><a href="https://www.naps2.com/doc-command-line.html#ocr-options"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opções de OCR</font></font></a></li><li style="margin-left: 30px;"><a href="https://www.naps2.com/doc-command-line.html#order-options"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opções de encomenda</font></font></a></li><li style="margin-left: 30px;"><a href="https://www.naps2.com/doc-command-line.html#split-options"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opções divididas</font></font></a></li><li style="margin-left: 30px;"><a href="https://www.naps2.com/doc-command-line.html#other-options"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Outras opções</font></font></a></li><li style="margin-left: 30px;"><a href="https://www.naps2.com/doc-command-line.html#placeholders"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Espaços reservados</font></font></a></li></ul></div>
+    <a class="back-link" href="https://www.naps2.com/support.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Voltar para o suporte</font></font></a>
+    <h1 id="overview"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">visão global</font></font></h1>
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">O NAPS2, além da GUI primária, também oferece uma interface de linha de comando (CLI) por meio do programa NAPS2.Console.exe. </font><font style="vertical-align: inherit;">Isso permite que os documentos digitalizados e salvos sejam automatizados e / ou com script.</font></font></p>
+    <h1 id="usage"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Uso</font></font></h1>
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">O NAPS2.Console usa opções padrão de estilo unix. </font><font style="vertical-align: inherit;">Cada opção tem um formato longo (por exemplo, "--output"), e alguns têm um formato curto (por exemplo, "-o"). </font><font style="vertical-align: inherit;">Algumas opções são sinalizadores e algumas devem receber um valor.</font></font></p>
+    <h2 id="required-options"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opções Requeridas</font></font></h2>
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Pelo menos uma dessas opções deve ser especificada.</font></font></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-o, --output {caminho}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica o caminho, o nome e a extensão do arquivo de saída a ser salvo. </font><font style="vertical-align: inherit;">A extensão determina o tipo de saída (por exemplo, ".pdf" para um arquivo PDF, ".jpg" para uma imagem JPEG, etc.).
+    </font></font></p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -o "F: \ recibo digitalizado.pdf"</font></font></pre>
+    <p></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-e, --email {nome_do_arquivo}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica que um e-mail deve ser enviado com a verificação anexada com o nome e extensão de arquivo fornecidos. </font><font style="vertical-align: inherit;">A extensão determina o tipo de anexo (por exemplo, ".pdf" para um arquivo PDF, ".jpg" para uma imagem JPEG, etc.).
+    </font></font></p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -e "scan.pdf"</font></font></pre>
+    <p></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-a, --autosave</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica que as configurações de </font><strong><font style="vertical-align: inherit;">salvamento</font></strong><font style="vertical-align: inherit;"> automático do perfil selecionado devem ser usadas. </font><font style="vertical-align: inherit;">O perfil deve ter Auto Salvar ativado.
+    </font></font></p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -a</font></font></pre>
+    <p></p>
+    <h2 id="import-options"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opções de Importação</font></font></h2>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-i, --import {filenames}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica o nome e o caminho de um ou mais arquivos pdf / image para importar. </font><font style="vertical-align: inherit;">Os arquivos importados são prefixados na saída na ordem em que são especificados. </font><font style="vertical-align: inherit;">Vários arquivos são separados por um ponto-e-vírgula (";").
+    </font></font></p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -i "F: \ scan.pdf incompleto" -o "F: \ complete scan.pdf"</font></font></pre>
+    <p></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--importpassword {password}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica a senha a ser usada para importar PDFs criptografados.
+    </font></font></p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -i "F: \ encrypted.pdf" --importpassword "123456" -o "F: \ complete scan.pdf"</font></font></pre>
+    <p></p>
+    <h3 id="combining-and-converting-files"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Combinando e convertendo arquivos</font></font></h3>
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">A opção de importação -i / - pode ser usada em combinação com a opção "-n 0" para combinar vários arquivos juntos ou para alterar o tipo de um arquivo sem fazer nenhuma varredura.</font></font></p>
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        Para combinar várias imagens em um PDF:</font></font><br>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -i "F: \ a.jpg; F: \ b.jpg; F: \ c.jpg" -n 0 -o "F: \ abc.pdf"</font></font></pre>
+    <p></p>
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        Para combinar vários PDFs juntos:</font></font><br>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -i "F: \ a.pdf; F: \ b.pdf; F: \ c.pdf" -n0 -o "F: \ abc.pdf"</font></font></pre>
+    <p></p>
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        Para converter um TIFF em um PDF:</font></font><br>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -i "F: \ a.tiff" -n 0 -o "F: \ a.pdf"</font></font></pre>
+    <p></p>
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        Para converter entre tipos de imagem:</font></font><br>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -i "F: \ a.png" -n 0 -o "F: \ a.jpg"</font></font></pre>
+    <p></p>
+    <h3 id="slicing-imported-files"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cortando arquivos importados</font></font></h3>
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        Para importar apenas parte de um arquivo PDF ou TIFF, você pode usar a </font></font><a href="https://stackoverflow.com/questions/509211/understanding-pythons-slice-notation/509295#509295"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">notação de fatia</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> . </font><font style="vertical-align: inherit;">Nota: Com esta notação, os números das páginas começam em 0!
+    </font></font></p>
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        Para obter a primeira página:</font></font><br>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -i "F: \ abcd.pdf [0]" -n 0 -o "F: \ a.pdf"</font></font></pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        Para substituir a terceira página:</font></font><br>
+        <pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -i "F: \ abcde.pdf [: 2]; F: \ r.pdf; F: \ abcde.pdf [3:]" -n 0 -o "F: \ abrde.pdf"</font></font></pre>
+    <p></p>
+    <p>
+        </p><table>
+            <tbody><tr><td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Primeira página:&nbsp;</font></font></td><td><code>[0]</code></td></tr>
+            <tr><td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Segunda página:&nbsp;</font></font></td><td><code>[1]</code></td></tr>
+            <tr><td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Terceira página:&nbsp;</font></font></td><td><code>[2]</code></td></tr>
+            <tr><td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Última página:&nbsp;</font></font></td><td><code>[-1]</code></td></tr>
+            <tr><td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Segunda e última página:&nbsp;</font></font></td><td><code>[-2]</code></td></tr>
+            <tr><td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Primeiras duas páginas:&nbsp;</font></font></td><td><code>[:2]</code></td></tr>
+            <tr><td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Pule as duas primeiras páginas:&nbsp;</font></font></td><td><code>[2:]</code></td></tr>
+            <tr><td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Últimas duas páginas:&nbsp;</font></font></td><td><code>[-2:]</code></td></tr>
+            <tr><td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Pule as duas últimas páginas:&nbsp;</font></font></td><td><code>[:-2]</code></td></tr>
+            <tr><td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Pule as primeiras / últimas duas páginas:&nbsp;</font></font></td><td><code>[2:-2]</code></td></tr>
+        </tbody></table>
+    <p></p>
+    <h2 id="pdf-options"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opções de PDF</font></font></h2>
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Essas opções são aplicáveis ​​apenas se o arquivo de saída for um PDF.</font></font></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--pdftitle {title}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica o título dos metadados gerados em PDF.
+    </font></font></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--pdfauthor {author}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica o autor dos metadados gerados em PDF.
+    </font></font></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--pdfsubject {subject}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica o assunto dos metadados gerados em PDF.
+    </font></font></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--pdfkeywords {keywords}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica as palavras-chave para os metadados PDF gerados.
+    </font></font></p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -o "F: \ scan.pdf" --pdftitle "Recibos de Janeiro" --pdfauthor "John Smith" --pdfsubject "Recibos" --pdfkeywords "Janeiro, Recibos"</font></font></pre>
+    <p></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--usesavedmetadata</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica que os metadados configurados na GUI devem ser usados ​​para PDF gerado.
+    </font></font></p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -o "F: \ scan.pdf" --usesavedmetadata</font></font></pre>
+    <p></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--encryptconfig {caminho}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica o nome e o caminho de um arquivo XML para configurar a criptografia para o PDF gerado.</font></font><br>
+    </p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -o "F: \ encrypted.pdf" --encryptconfig "F: \ pdfencryption.xml"</font></font></pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        pdfencryption.xml:
+        </font></font><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">&lt;? xml version = "1.0"&gt;</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+&lt;PdfEncryption xmlns: xsi = "http://www.w3.org/2001/XMLSchema-instance" xmlns: xsd = "http://www.w3.org/2001/XMLSchema"&gt;</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  &lt;EncryptPdf&gt; true &lt;/ EncryptPdf&gt;</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  &lt;UserPassword&gt; 123 &lt;/ UserPassword&gt;</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  &lt;OwnerPassword&gt; 456 &lt;/ OwnerPassword&gt;</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  &lt;AllowContentCopyingForAccessibility&gt; false &lt;/ AllowContentCopyingForAccessibility&gt;</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  &lt;AllowAnnotations&gt; false &lt;/ AllowAnnotations&gt;</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  &lt;AllowDocumentAssembly&gt; false &lt;/ AllowDocumentAssembly&gt;</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  &lt;AllowContentCopying&gt; false &lt;/ AllowContentCopying&gt;</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  &lt;AllowFormFilling&gt; false &lt;/ AllowFormFilling&gt;</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  &lt;AllowFullQualityPrinting&gt; false &lt;/ AllowFullQualityPrinting&gt;</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  &lt;AllowDocumentModification&gt; false &lt;/ AllowDocumentModification&gt;</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+  &lt;AllowPrinting&gt; false &lt;/ AllowPrinting&gt;</font></font><font></font><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+&lt;/ PdfEncryption&gt;</font></font></pre>
+    <p></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--usesavedencryptconfig</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica que a criptografia configurada na GUI deve ser usada para o PDF gerado.
+    </font></font></p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -o "F: \ encrypted.pdf" --usesavedencryptconfig</font></font></pre>
+    <p></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--pdfcompat {type}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica o padrão usado para o PDF gerado ("padrão", "A1-b", "A2-b", "A3-b" ou "A3-u").
+    </font></font></p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -o "F: \ pdfa.pdf" --pdfcompat A1-b</font></font></pre>
+    <p></p>
+    <h2 id="image-options"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opções de imagem</font></font></h2>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--jpegquality {#}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        (Padrão: 75) Especifica a qualidade dos arquivos JPEG salvos (0-100).
+    </font></font></p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -o "F: \ scan.jpg" --jpegquality 90</font></font></pre>
+    <p></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--tiffcomp {type}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica o tipo de compactação usado para arquivos TIFF ("auto", "lzw", "ccitt4" ou "none").
+    </font></font></p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -o "F: \ scan.tiff" --tiffcomp nenhum</font></font></pre>
+    <p></p>
+    <h2 id="email-options"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opções de email</font></font></h2>
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Essas opções são aplicáveis ​​somente se -e / - email for especificado.</font></font></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--to {address}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica um ou mais endereços (separados por vírgula) dos destinatários do email.
+    </font></font></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--cc {address}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica um ou mais endereços (separados por vírgula) dos destinatários do email.
+    </font></font></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--bcc {address}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica um ou mais endereços (separados por vírgula) dos destinatários do email.
+    </font></font></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--subject {subject}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica o assunto da mensagem de email.
+    </font></font></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--body {text}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica o corpo do texto da mensagem de email.
+    </font></font></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--autosend</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica que o email deve ser enviado sem solicitar que o usuário o edite primeiro. </font><font style="vertical-align: inherit;">Observe que o Outlook pode não permitir que o email seja enviado sem a aprovação do usuário.
+    </font></font></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--silentsend</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Requer --autosend. </font><font style="vertical-align: inherit;">Especifica que o usuário não deve ser solicitado a autenticar. </font><font style="vertical-align: inherit;">Isso pode resultar em um erro se a autenticação for necessária. </font><font style="vertical-align: inherit;">Observe que o Outlook pode não permitir que o email seja enviado sem a aprovação do usuário.
+    </font></font></p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -e "scan.pdf" --to "jsmith@example.com" --subject "Documento digitalizado" --body "Aqui está." </font><font style="vertical-align: inherit;">--autosend --silentsend</font></font></pre>
+    <p></p>
+    <h2 id="ocr-options"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opções de OCR</font></font></h2>
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Se as opções de OCR não forem especificadas, as opções da GUI serão usadas.</font></font></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--ocrlang {code}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica o </font><strong><font style="vertical-align: inherit;">código de</font></strong><font style="vertical-align: inherit;"> três letras para o idioma usado para o OCR (por exemplo, 'eng' para inglês, 'fra' para francês, etc.). </font><font style="vertical-align: inherit;">Vários códigos podem ser separados pelo símbolo '+'. </font><font style="vertical-align: inherit;">Implica --enableocr. </font><font style="vertical-align: inherit;">Referência: </font></font><a href="http://www.loc.gov/standards/iso639-2/php/code_list.php" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">http://www.loc.gov/standards/iso639-2/php/code_list.php</font></font></a>
+    </p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -o "F: \ scan.pdf" --ocrlang "eng"</font></font></pre>
+    <p></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--enableocr</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica que o OCR deve ser usado ao gerar PDFs.
+    </font></font></p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -o "F: \ scan.pdf" --enableocr</font></font></pre>
+    <p></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--disableocr</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica que o OCR NÃO deve ser usado ao gerar PDFs. </font><font style="vertical-align: inherit;">Substitui --enableocr.
+    </font></font></p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -o "F: \ scan.pdf" --disábil</font></font></pre>
+    <p></p>
+    <h2 id="order-options"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opções de encomenda</font></font></h2>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--interleave</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica que as páginas devem ser intercaladas. </font><font style="vertical-align: inherit;">Por exemplo, se você digitalizar páginas na ordem "1, 3, 5, 2, 4, 6", essa opção resultará na ordem "1, 2, 3, 4, 5, 6".
+    </font></font></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--altinterleave</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica que as páginas devem ser intercaladas de maneira alternativa. </font><font style="vertical-align: inherit;">Por exemplo, se você digitalizar páginas na ordem "1, 3, 5, 6, 4, 2", essa opção resultará na ordem "1, 2, 3, 4, 5, 6".
+    </font></font></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--deinterleave</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica que as páginas devem ser desintercaladas. </font><font style="vertical-align: inherit;">Por exemplo, se você tiver páginas na ordem "1, 4, 2, 5, 3, 6", usar esta opção resultará na ordem "1, 2, 3, 4, 5, 6".
+    </font></font></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--altdeinterleave</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica que as páginas devem ser desintercaladas de uma maneira alternativa. </font><font style="vertical-align: inherit;">Por exemplo, se você tiver páginas na ordem "1, 6, 2, 5, 3, 4", essa opção resultará na ordem "1, 2, 3, 4, 5, 6".
+    </font></font></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--reverse</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica que as páginas devem ser invertidas. </font><font style="vertical-align: inherit;">Por exemplo, se você digitalizar páginas na ordem "6, 5, 4, 3, 2, 1", essa opção resultará na ordem "1, 2, 3, 4, 5, 6".
+    </font></font></p>
+    <h2 id="split-options"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Opções divididas</font></font></h2>
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Essas opções são mutuamente exclusivas.</font></font></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--split</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica que cada página deve ser salva em seu próprio arquivo PDF ou TIFF.
+    </font></font></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--splitscans</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica que as páginas de cada varredura devem ser salvas em seu próprio arquivo. </font><font style="vertical-align: inherit;">Isso só faz sentido com a opção -n.
+    </font></font></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--splitpatcht</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica que as páginas devem ser salvas em vários arquivos, separadas por </font><font style="vertical-align: inherit;">páginas do </font></font><a href="https://www.naps2.com/doc-batch-scan.html#patch-t"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Patch-T</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> .
+    </font></font></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--splitsize {#}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica que as páginas devem ser salvas em vários arquivos, com o número de páginas por arquivo.
+    </font></font></p>
+    <h2 id="other-options"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Outras opções</font></font></h2>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-p, --profile {name}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Especifica o nome do perfil a ser usado durante a varredura. </font><font style="vertical-align: inherit;">Perfis são definidos usando a GUI. </font><font style="vertical-align: inherit;">Se essa opção não for especificada, o perfil usado mais recentemente na GUI será selecionado.
+    </font></font></p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -o "F: \ recibo digitalizado.pdf" -p "Canon MP495 (cor)"</font></font></pre>
+    <p></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-v, --verbose</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Exibe informações de progresso. </font><font style="vertical-align: inherit;">Se não for especificado, nenhuma saída será exibida após o sucesso.
+    </font></font></p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -o "F: \ recibo digitalizado.pdf" -v</font></font></pre>
+    <p></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--progress</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Exibe uma janela gráfica para o progresso da digitalização.
+    </font></font></p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -o "F: \ scanned receipt.pdf" --progress</font></font></pre>
+    <p></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-n, --number {#}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        (Padrão: 1) O número de varreduras a serem executadas. </font><font style="vertical-align: inherit;">Isso pode ser diferente do número de páginas digitalizadas (por exemplo, se você tiver um alimentador automático de documentos).
+    </font></font></p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -o "F: \ recibos digitalizados.pdf" -n 5</font></font></pre>
+    <p></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-d, --delay {#}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        (Padrão: 0) O atraso (em milissegundos) entre cada varredura.
+    </font></font></p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -o "F: \ recibos digitalizados.pdf" -n 5 -d 5000</font></font></pre>
+    <p></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-f, --force</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Sobrescreve os arquivos existentes. </font><font style="vertical-align: inherit;">Se não for especificado, quaisquer arquivos que já existam não serão alterados (e uma mensagem de erro será exibida).
+    </font></font></p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -o "F: \ recibo digitalizado.pdf" -f</font></font></pre>
+    <p></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">-w, --wait</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Após terminar, aguarde a entrada do usuário (enter / return) antes de sair.
+    </font></font></p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console -o "F: \ recibo digitalizado.pdf" -w</font></font></pre>
+    <p></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--install {component}</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Instala o componente especificado. </font><font style="vertical-align: inherit;">Valores possíveis: "genericimport", "ocr-eng" (e outros códigos de idioma - ver </font></font><a href="http://www.loc.gov/standards/iso639-2/php/code_list.php" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">referência</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> )
+    </font></font></p>
+    <p>
+        <strong><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">--help</font></font></strong><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 
+        Exibe uma tela de ajuda similar a esta página da wiki.
+    </font></font></p>
+    <p>
+        </p><pre><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">naps2.console --help</font></font></pre>
+    <p></p>
+    <h2 id="placeholders"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Espaços reservados</font></font></h2>
+    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        Quaisquer argumentos de caminho (-o, -e, etc.), bem como alguns argumentos de texto (--subject, --body) podem usar marcadores de posição. </font><font style="vertical-align: inherit;">Os seguintes marcadores de posição estão disponíveis:
+    </font></font></p>
+    <p>
+        <code>$(YYYY)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- o ano em curso. </font></font><br>
+        <code>$(YY)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- O ano atual (00-99). </font></font><br>
+        <code>$(MM)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- O mês atual (01-12). </font></font><br>
+        <code>$(DD)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- O dia atual (01-31). </font></font><br>
+        <code>$(hh)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- A hora atual (00-23). </font></font><br>
+        <code>$(mm)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- O minuto atual (00-59). </font></font><br>
+        <code>$(ss)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- O segundo atual (00-59). </font></font><br>
+        <code>$(nnnn)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- Um número incremental único (0001, 0002, etc.). </font></font><br>
+        <code>$(nnn)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- Um número incremental único (001, 002, etc.). </font></font><br>
+        <code>$(nn)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- Um número incremental único (01, 02, etc.). </font></font><br>
+        <code>$(n)</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- Um número incremental único (1, 2, etc.).
+    </font></font></p>
+    <a class="back-link" href="https://www.naps2.com/support.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Voltar para o suporte</font></font></a>
+</div>
+
+
+        <footer class="simple">
+            <div class="donation-request">
+                <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">O NAPS2 é fornecido gratuitamente, sem anúncios ou restrições. </font><font style="vertical-align: inherit;">Considere fazer uma doação.</font></font></p>
+                <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=M77MFAP2ZV9RG">
+                    <img src="./Uso de linha de comando - Suporte - NAPS2 - Documentação pt-BR_files/btn_donate_LG.gif">
+                </a>
+            </div>
+            <div class="copyright text-muted small pull-right"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Copyright © Ben Olden-Cooligan 2019</font></font></div>
+        </footer>
+    
+
+    <script async="" src="./Uso de linha de comando - Suporte - NAPS2 - Documentação pt-BR_files/analytics.js.download"></script><script src="./Uso de linha de comando - Suporte - NAPS2 - Documentação pt-BR_files/site.js.download"></script>
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-65578873-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+
+
+<div id="lightboxOverlay" class="lightboxOverlay" style="display: none;"></div><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Uso de linha de comando - Suporte - NAPS2 - Documentação pt-BR_files/translate_24dp.png" width="20" height="20" alt="Google Tradutor"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Texto original</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Sugerir uma tradução melhor</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><div id="lightbox" class="lightbox" style="display: none;"><div class="lb-outerContainer"><div class="lb-container"><img class="lb-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="><div class="lb-nav"><a class="lb-prev" href="https://www.naps2.com/doc-command-line.html"></a><a class="lb-next" href="https://www.naps2.com/doc-command-line.html"></a></div><div class="lb-loader"><a class="lb-cancel"></a></div></div></div><div class="lb-dataContainer"><div class="lb-data"><div class="lb-details"><span class="lb-caption"></span><span class="lb-number"></span></div><div class="lb-closeContainer"><a class="lb-close"></a></div></div></div></div><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div></body></html>
